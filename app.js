@@ -24,6 +24,13 @@ io.on('connect', function(socket) {
   });
 });
 
+READ THIS BEFORE YOU CONTINUE TOMORROW ////////////// 
+http://stackoverflow.com/questions/7511321/uploading-base64-encoded-image-to-amazon-s3-via-node-js
+
+YOU NEED TO GET THE ARRAY of BASE64 GIF files, and SAVE THOSE as GIFS on AMAZON S3.
+
+Then you need to send each of those to the Google Cloud Vision Processor. 
+
 app.use('/scripts/gifshot', express.static(__dirname + '/node_modules/gifshot/build/'));
 
 server.listen(port, function() {

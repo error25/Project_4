@@ -15,7 +15,8 @@ function webcamController($window, $scope) {
   self.message = null;
   self.username = "";
   self.hasSetUsername = false;
-  self.lastImage = "";
+  self.lastImage = {};
+
 
   self.setUsername = function() {
     if(self.username.length > 2) self.hasSetUsername = true;
@@ -27,8 +28,9 @@ function webcamController($window, $scope) {
     });
   });
 
-  self.sendMessage = function() {
-    socket.emit('message', { text: self.message, lastimage: self.lastImage, username: self.username });
+  self.sendMessage = function(lastImage) {
+    console.log(lastImage); //64bit string of the
+    socket.emit('message', { text: self.message, lastimage: lastImage, username: self.username });
    // self.messages.push({ text: self.message, username: 'someuser' });
     self.message = null;
   }
@@ -36,6 +38,41 @@ function webcamController($window, $scope) {
 self = this;
 console.log ("webcamController loaded")
 
+
+/////////////// Make Animated Gif ////////
+self.makeAnimatedGif = function (){
+
+gifshot.createGIF({ // options
+
+  // Desired width of the image 
+  'gifWidth': 400,
+  // Desired height of the image 
+  'gifHeight': 400,
+  'keepCameraOn': false,
+  'interval': 0.1,
+  'numFrames': 5,
+  'saveRenderingContexts': true,
+
+}, function(obj) {
+  if(!obj.error) {
+
+    var image = obj.image,
+    animatedImage = document.createElement('img');
+    animatedImage.src = image;
+    document.body.appendChild(animatedImage);
+
+
+    $window.lastImage = obj.savedRenderingContexts; // store ready to send in message
+    self.sendMessage($window.lastImage); // send SOCKET message function
+   
+  }
+  gifshot.stopVideoStreaming();
+});
+
+}
+
+
+/////////////////////////// We dont need this webcam stuff below anymore ///
 
 
 this.getVideo = function(){
