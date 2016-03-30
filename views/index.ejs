@@ -1,0 +1,97 @@
+<<!DOCTYPE html>
+<html ng-app="VinceLynch">
+<head>
+  <title>Vince Lynch - Web & Psychology</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:500' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/angularapp.js"></script>
+   <script src="/assets/controllers/webcamController.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
+
+
+</head>
+<body  ng-controller="webcamController as webcam">
+
+  <main class="container">
+    <h1>Angular Chat</h1>
+
+    <div ng-hide="webcam.hasSetUsername">
+      <form ng-submit="webcam.setUsername()">
+        <div class="form-group">
+          <input ng-model="webcam.username" class="form-control" placeholder="Username">
+        </div>
+
+        <button class="btn btn-primary">Start Chatting!</button>
+      </form>
+    </div>
+
+    <div ng-show="webcam.hasSetUsername">
+      <div id="message-panel">
+        <ul>
+          <li ng-repeat="message in webcam.messages track by $index" ng-class="{ me: message.username === webcam.username }">
+            <span class="message">{{ message.text }}</span>
+            <span class="username">{{ message.username }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <form ng-submit="webcam.sendMessage()" class="form-inline">
+        <div class="form-group">
+          <input ng-model="webcam.message" class="form-control">
+        </div>
+
+        <button class="btn btn-primary">Send</button>
+      </form>
+    </div>
+
+<div class="sideleft col-md-3"></div>
+
+
+<h1>Vince Lynch</h1>
+<h4>Web & Psychology</h4>
+{{ main.helloworld }}
+
+
+
+
+
+
+<section class="container">
+
+
+
+
+<h1>Webcam Ideas Test</h1>
+
+
+<video autoplay="true" id="videoElement">
+ 
+</video>
+
+<button ng-click="webcam.getVideo()">Make Webcam</button>
+<button id="startbutton" ng-click="webcam.takephoto()">Take photo</button>
+
+
+
+<input type="file" accept="image/*;capture=camera">
+
+<canvas id="canvas">
+</canvas>
+<div class="output">
+  <img id="photo" alt="The screen capture will appear in this box.">
+</div>
+
+
+</section>
+
+<br />
+
+
+ -->
+</body>
+</html>
