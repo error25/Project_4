@@ -24,6 +24,8 @@ io.on('connect', function(socket) {
   });
 });
 
+app.use('/scripts/gifshot', express.static(__dirname + '/node_modules/gifshot/build/'));
+
 server.listen(port, function() {
   console.log('Server started on ' + port);
 });
