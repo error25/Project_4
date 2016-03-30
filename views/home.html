@@ -1,0 +1,172 @@
+<<!DOCTYPE html>
+<html ng-app="VinceLynch">
+<head>
+  <title>Vince Lynch - Web & Psychology</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:500' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/angularapp.js"></script>
+  <script src="/assets/controllers/mainController.js"></script>
+  <script src="/assets/controllers/webcamController.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/app.css">
+
+
+</head>
+<body ng-controller="MainController as main">
+
+<div class="sideleft col-md-3"></div>
+
+<main class="container col-md-6">
+<h1>Vince Lynch</h1>
+<h4>Web & Psychology</h4>
+{{ main.helloworld }}
+
+
+
+
+
+
+<section class="container" ng-controller="webcamController as webcam">
+
+
+
+
+<h1>Webcam Ideas Test</h1>
+
+
+<video autoplay="true" id="videoElement">
+ 
+</video>
+
+<button ng-click="webcam.getVideo()">Make Webcam</button>
+<button id="startbutton" ng-click="webcam.takephoto()">Take photo</button>
+
+
+
+<input type="file" accept="image/*;capture=camera">
+
+<canvas id="canvas">
+</canvas>
+<div class="output">
+  <img id="photo" alt="The screen capture will appear in this box.">
+</div>
+
+
+</section>
+
+<p>I guess... I have come to a point in my life where I find it difficult what to say.</p>
+
+<p>Steve Jobs said, that. Maybe, there is something you always wanted to do</p>
+
+<p> I guess, <b>I started my life</b> with two things I knew, I knew:</p>
+
+<p>When I was ten, I loved computers. Well, I always loved computers. Everyone thought I was a hacker or a geek. And maybe I was or wasn't it really doesnt matter anymore. But I did love Visual Basic and developed a few different games and bits and pieces on Visual Basic Studio on Windows. </p>
+
+<p> The love of computers, was coupled with a love of philosophy and psychology</p>
+
+<p> When I was Sixteen, I started work as a Hypnotist. Teaching and training other hypnotists. This became my expertise' for the next ten years++</p>
+
+<p> When I was 28 years old, I was lucky that a friend, advised me, on how to alter my business processes, and got me into the world of affiliate marketing....</p>
+
+<p> Right now, I have just finished a Web Development Immersive Bootcamp in Silicon Roundabout, London... I have finished spending 3 months making internet things.</p>
+
+
+<br />
+<br />
+
+
+
+<!-- 
+
+<h1 class='padd'></h1>
+<ul class='timeline'>
+  <li class="year first">2016</li>
+  <li class='event offset-first'>
+  <b>Web Development Immersive</b> - General Assembly
+  </li>
+
+  <li class="event">
+  <p>Made the decision to <b>GO BACK</b> to my entrepreneurial self and focus on my skills within <b>Tech</b> as a programmer, developer, and expert in Psychology. Decided to retrain in Ruby, Angular, NodeJS, jQuery etc to really push forwards my marketing and development skills in new technologies, building on my former experience as a internet marketer. 
+    </a>
+  </li>
+
+  <li class="year">2015</li>
+  <li class='event' href="#">
+    Worked for <b>Diageo</b>, as a <b>Off Trade Manager</b> curtosy of CPM <b>I aided the launch of products, and seasoning planned marketing events/campaigns in the Off-Trade</b> Anything outside of bars and clubs with the associated brands <b>secured deals and business for Diageo</b>
+  </li>
+  <li class="event offset-first">
+  <p><b>Affiliate Media Traffic Buyer</b>- Finished Work with BF8 Media. Worked in Health & fitness verticals </p>
+
+  </li>
+
+  <li class="year">2014</li>
+  <li class="event offset-first">
+  <p><b>Affiliate Marketer</b>- Restarted work with BF8 Media </p>
+
+  </li>
+
+
+
+  <li class="year">2013</li>
+  <li class="event offset-first">
+  <p><b>Google Field Manager </b> Worked on behalf of Google as an Educator & Trainer about Google services for Business & Education throughout the launch of Google Stores within stores and consumer tech shows across the UK - managed a team of 10.</p>
+  <img class='centered' src="/assets/images/google.png" alt=""/>
+  <a href='assets/images/google.jpg'>&copy;</a>
+  </li>
+
+
+
+
+  <li class="year">2012</li>
+  <li class="event offset-first">
+    <p>Final Year operating <b>Street Hypnosis Ltd </b>- now a fully online membership site </p>
+    <img class='centered' src="/assets/images/streethypnosis.png" alt=""/>
+    <a href='assets/images/streethypnosis.jpg'>&copy;</a>
+  </li>
+  <li class="event">
+    <p>Started working for <b>BF8 Media as an affiliate marketer</b></p>
+    <img class='centered' src="/assets/images/bf8.png" alt=""/>
+    <a href='assets/images/bf8.jpg'>&copy;</a>
+  </li>
+
+
+    <li class="year">2010</li>
+    <li class="event offset-first">
+      <p>I have successfully taught hypnosis to over 10,000 people (pretty much every modern day hypnotist in the world). I have spoken to world class businesses organisations, goverments, and neuroscientific departments regarding hypnosis, NLP, and psychology. </p>
+    </li>
+
+    <li class="year">2008</li>
+    <li class="event offset-first">
+      <p>Became <b>Lead Instructor & Web marketing </b> for <b>GetMeTheGirl</b> a leading PUA company in the UK - as a side business to my full time Street Hypnosis Ltd Business. </p>
+    </li>
+    
+
+    <li class="year">2006</li>
+    <li class="event offset-first">
+      <p>Became <b>Firewalk Instructor and NLP Workshop Deliverer.</b>as  <b>Sole Trader ('Vince Lynch')</b> Delivered over 50 workshops in my first YEAR!</p>
+    </li>
+
+
+
+    <li class="year">2004</li>
+    <li class="event offset-first">
+      <p>Began working as  <b>Hypnotherapy & Hypnosis.</b> training instructor on behalf of other Hypnosis & NLP Training certification bodies.</p>
+    </li>
+
+
+  <li class="year">2003</li>
+  <li class="event offset-first">
+    <p>Launched my Hypnosis Business </p>
+  </li>
+  
+</ul>
+
+</main>
+
+<div class="sideright col-md-3"></div>
+ -->
+</body>
+</html>
