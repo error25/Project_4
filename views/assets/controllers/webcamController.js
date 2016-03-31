@@ -1,3 +1,5 @@
+// global variables
+data = "";
 
 angular.module('VinceLynch')
 .controller('webcamController', webcamController);
@@ -62,11 +64,26 @@ gifshot.createGIF({ // options
     document.body.appendChild(animatedImage);
 
 
-    $window.lastImage = obj.savedRenderingContexts; // store ready to send in message
-    self.sendMessage($window.lastImage); // send SOCKET message function
+    // http://stackoverflow.com/questions/12710001/how-to-convert-uint8-array-to-base64-encoded-string
+
+    data = obj; // store ready to send in message
+    console.log(data);
+    self.sendMessage(data.image); // send SOCKET message function
+
+
+   // var frame1 = data[0].data;
+    
+   //var image1 = encodeToImage(frame1);
+    //
+    //self.sendMessage(b64encoded); // send SOCKET message function
+
+    //data = ($window.lastImage[0].data).toDataURL('image/png');
+    //data = data.replace(/^data:image\/(png|jpg);base64,/, "")
+
+
    
   }
-  gifshot.stopVideoStreaming();
+
 });
 
 }
