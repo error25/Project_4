@@ -3,22 +3,54 @@
 <head>
   <title>Vince Lynch - Web & Psychology</title>
   <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:500' rel='stylesheet' type='text/css'>
+
+  <!-- External Modules -->
   <script src='/scripts/gifshot/gifshot.js'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+  <script src="/assets/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
+  <script src="/assets/vendor/satellizer/satellizer.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <!-- External CSS Frameworks -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+
+  <!-- Internal Modules -->
   <script src="assets/app.js"></script>
   <script src="assets/angularapp.js"></script>
    <script src="/assets/controllers/webcamController.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
+   <script src="/js/controllers/mainController.js"></script>
+   <script src="/js/services/oauthKeys.js"></script>
+   <script src="/js/services/token.js"></script>
+   <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
 
 
 </head>
 <body  ng-controller="webcamController as webcam">
 
-  <main class="container">
+  <main class="container" ng-controller="MainController as main">
+
+
+  <div class="centered">
+    <div ng-hide="main.isLoggedIn()">
+      <h1>Satellizer</h1>
+      <h3>Oauth for Facebook &amp; Github</h3>
+      <hr>
+      <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
+      <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
+      <p>Made with <i class="fa fa-heart"></i> by General Assembly</p>
+    </div>
+
+
+      <div ng-show="main.isLoggedIn()">
+        <img ng-src="{{ main.currentUser.picture }}">
+        <h2>{{ main.currentUser.name }}</h2>
+        <hr>
+        <button class="logout" ng-click="main.logout()"><i class="fa fa-sign-out"></i> Logout</button>
+      </div>
+    </div>
+
     <h1>Angular Chat</h1>
 
     <div ng-hide="webcam.hasSetUsername">
