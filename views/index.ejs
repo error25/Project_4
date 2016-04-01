@@ -11,6 +11,7 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
   <script src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
   <script src="/vendor/satellizer/satellizer.min.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <!-- External CSS Frameworks -->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -26,55 +27,23 @@
 
 
 </head>
+
+
 <body  ng-controller="webcamController as webcam">
 
   <main class="container" ng-controller="MainController as main">
 
-
-  <div class="centered">
-    <div ng-hide="main.isLoggedIn()">
-      <h1>Satellizer</h1>
-      <h3>Oauth for Facebook &amp; Github</h3>
-      <hr>
-      <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
-      <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
- 
-      <button class="github" ng-click="main.authenticate('instagram')"><i class="fa fa-github-square"></i> Sign in with Insgram</button>
+  <nav class="tabs">
+    <a ui-sref-active="active" ui-sref="home">My List</a>
+    <a ui-sref-active="active" ui-sref="archive">Archive</a>
+    <a ui-sref-active="active" ui-sref="about">about</a>
+  </nav>
+  <section ui-view>
 
 
-     
-      <form ng-submit="main.login()">
-        Login with email address and password
-        <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
-        <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
-        <input type="submit" id="submit" value="Submit" />
-     </form>
+  </section>
 
-
-     <form ng-submit="main.register()">
-       Login with email address and password
-       <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
-       <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
-       <input type="submit" id="submit" value="Submit" />
-     </form>
-
-
-     <h3>Register</h3>
-     <form ng-submit="main.register()" novalidate>
-       <label for="username">Username</label>
-       <input type="text" name="username" placeholder="Username" ng-model="main.currentUser.username">
-
-       <label for="email">Email</label>
-       <input type="email" name="email" placeholder="Email" ng-model="main.currentUser.email">
-
-       <label for="password">Password</label>
-       <input type="password" name="password" placeholder="Password" ng-model="main.currentUser.password">
-
-       <label for="passwordConfirmation">Password Confirmation</label>
-       <input type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="main.currentUser.passwordConfirmation">
-
-       <input type="submit" value="Register">
-     </form>
+  
 
     </div>
 
