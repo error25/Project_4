@@ -4,6 +4,8 @@ var User = require('../models/user');
 var config = require('../config/app');
 var oauth = require('../config/oauth');
 var secret = require('../config/tokens').secret;
+var moment = require('moment');
+//var jwt = require('jwt-simple');
 
 
 
@@ -161,17 +163,116 @@ function github(req,res) {
 }
 
 
+/*
+ |--------------------------------------------------------------------------
+ | Sign in with Instagram
+ |--------------------------------------------------------------------------
+ */
+ function instagram(req,res) {
+   console.log("Instagram says: req.body.code " + req.body.code)
+  var accessTokenUrl = 'https://api.instagram.com/oauth/access_token';
 
+  var params = {
+    client_id: req.body.clientId,
+    redirect_uri: req.body.redirectUri,
+    client_secret: process.env.INSTAGRAM_API_SECRET,
+    code: req.body.code,
+    grant_type: 'authorization_code'
+  };
 
-// Handles post request FROM INSTAGRAM to our server
+  // Step 1. Exchange authorization code for access token.
+  request.post({ url: accessTokenUrl, form: params, json: true }, function(error, response, body) {
+
+    // Step 2a. Link user accounts.
+    if (req.headers.authorization) {
+
+      User.findOne({ instagramId: body.user.id }, function(err, existingUser) {
+
+        var token = req.headers.authorization.split(' ')[1];
+        var payload = jwt.decode(token, config.tokenSecret);
+
+        User.findById(payload.sub, '+password', function(err, localUser) {
+          if (!localUser) {
+            return res.status(400).send({ message: 'User not found.' });
+          }
+
+          // Merge two accounts. Instagram account takes precedence. Email account is deleted.
+          if (existingUser) {
+
+            existingUser.email = localUser.email;
+            existingUser.password = localUser.password;
+            existingUser._id = localUser._id;
+            existingUser.picture = localUser.picture;
+
+            localUser.remove();
+
+            existingUser.save(function() {
+              // Finally, send a token to the front end
+              var payload = { _id: existingUser._id, name: existingUser.name, picture: existingUser.picture }
+              var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
+              return res.send({ token: token, user: payload });
+            });
+
+          } else {
+            // Link current email account with the Instagram profile information.
+            localUser.instagramId = body.user.id;
+            localUser.username = body.user.username;
+            localUser.fullName = body.user.full_name;
+            localUser.picture = body.user.profile_picture;
+            localUser.accessToken = body.access_token;
+
+            localUser.save(function() {
+              var payload = { _id: localUser._id, name: localUser.name, picture: localUser.picture }
+              var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
+              return res.send({ token: token, user: payload });
+            });
+
+          }
+        });
+      });
+    } else {
+      // Step 2b. Create a new user account or return an existing one.
+      User.findOne({ instagramId: body.user.id }, function(err, existingUser) {
+        if (existingUser) {
+          var token = createToken(existingUser);
+          return res.send({ token: token, user: existingUser });
+        }
+
+        var user = new User({
+          instagramId: body.user.id,
+          username: body.user.username,
+          fullName: body.user.full_name,
+          picture: body.user.profile_picture,
+          accessToken: body.access_token
+        });
+
+        user.save(function() {
+          var payload = { _id: user._id, name: user.username, picture: user.picture }
+          var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
+          return res.send({ token: token, user: payload });
+        });
+      });
+    }
+  });
+};
+
+/*// Handles post request FROM INSTAGRAM to our server
 function instagram(req,res) {
   console.log("Instagram says: req.body.code " + req.body.code)
 
-  var params = {
+  // var params = {
+  //   client_id: process.env.INSTAGRAM_API_KEY,
+  //   client_secret: process.env.INSTAGRAM_API_SECRET,
+  //   grant_type: "authorization_code",
+  //   code: req.body.code
+  // };
+
+  var params = { // advice from HERE -> https://github.com/sahat/instagram-hackhands/blob/master/server/server.js
     client_id: process.env.INSTAGRAM_API_KEY,
+    redirect_uri: req.body.redirectUri,
     client_secret: process.env.INSTAGRAM_API_SECRET,
-    grant_type: "authorization_code",
-    code: req.body.code
+    code: req.body.code,
+    grant_type: 'authorization_code'
   };
   console.log("Instagram APIs keys are" + process.env.INSTAGRAM_API_KEY + "&" +  process.env.INSTAGRAM_API_SECRET);
   // Make a request for an access token
@@ -220,7 +321,7 @@ function instagram(req,res) {
   .catch(function(err){
     return res.status(500).json(err);
   });
-}
+}*/
 
 module.exports = {
   facebook: facebook,
