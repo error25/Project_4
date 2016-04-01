@@ -1,14 +1,24 @@
 var morgan  = require('morgan');
 var express = require('express');
 var app     = express();
+var bodyParser = require('body-parser');
 var server  = require('http').createServer(app);
 var io      = require('socket.io')(server);
 var knox    = require('knox');
 var fs = require('fs');
+var fsPath = require('fs-path'); // makedirs with FS
 var gm = require('gm');
+////////////////// Routes Stuff
+var cors = require('cors');
+var router = require('./config/routes');
+var config = require('./config/app');
+
 var port    = process.env.PORT || 8000;
 var imageStore = "https://s3-eu-west-1.amazonaws.com/betterside/";
 var s3 = require('s3');
+
+var mongoose = require('mongoose');
+mongoose.connect(config.databaseUrl);
 
  
 var client = s3.createClient({
@@ -20,19 +30,24 @@ var client = s3.createClient({
   s3Options: {
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY,
-    // any other options are passed to new AWS.S3() 
-    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
   },
 });
 
-//project4-wdi
+
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public'));
 
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors({
+  origin: config.appUrl,
+  credentials: true
+}));
+
 
 app.get('/', function(req, res) {
   res.render('index');
@@ -52,23 +67,23 @@ io.on('connect', function(socket) {
 // save Base64 gif to file.
 var saveBase64Local = function(imageBase64, username){
 buf = new Buffer(imageBase64.replace(/^data:image\/\w+;base64,/, ""),'base64')
-fs.writeFile(username + '.gif', buf, function(err) {
+fs.writeFile('./public/uploads/' + username + '.gif', buf, function(err) {
   console.log(err);
    });
 }
 var gifFramesEachLoop = function(username) {
 var i = 0;
   while (i < 5){
-    writeGifFramesLocal(username + ".gif[" + i + "]", i, username);
+    writeGifFramesLocal('./public/uploads/' + username + ".gif[" + i + "]", i, username);
    i++  
  }
 }
 /////////Write Individual Image Frames
 var writeGifFramesLocal = function(localgif, i, username){
 gm(localgif)
-.write(username + i + '.png', function (err) {
+.write('./public/uploads/' + username + i + '.png', function (err) {
   if (err) console.log('aaw, shucks' + err);
-  frameSaved = username + i + '.png';
+  frameSaved = './public/uploads/' + username + i + '.png';
   console.log("successfully saved locally :" + frameSaved );
   framesToAmazon(frameSaved, username);
   });
@@ -98,26 +113,9 @@ var framesToAmazon = function(localfile, username){
 
 };
 
-
-
-
-
-
-
-   
-/*
-READ THIS BEFORE YOU CONTINUE TOMORROW ////////////// 
-http://stackoverflow.com/questions/7511321/uploading-base64-encoded-image-to-amazon-s3-via-node-js
-
-YOU NEED TO GET THE ARRAY of BASE64 GIF files, and SAVE THOSE as GIFS on AMAZON S3.
-
-Then you need to send each of those to the Google Cloud Vision Processor. 
-
-
-////////////// Changed my mind
-
-http://stackoverflow.com/questions/23620470/node-js-saving-canvas-as-an-image-for-heroku-hosted-apps-using-amazon-s3*/
 app.use('/scripts/gifshot', express.static(__dirname + '/node_modules/gifshot/build/'));
+
+app.use('/', router);
 
 server.listen(port, function() {
   console.log('Server started on ' + port);

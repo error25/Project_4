@@ -1,7 +1,7 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="VinceLynch">
 <head>
-  <title>Vince Lynch - Web & Psychology</title>
+
   <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:500' rel='stylesheet' type='text/css'>
 
   <!-- External Modules -->
@@ -9,21 +9,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
-  <script src="/assets/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
-  <script src="/assets/vendor/satellizer/satellizer.min.js"></script>
+  <script src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
+  <script src="/vendor/satellizer/satellizer.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <!-- External CSS Frameworks -->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 
   <!-- Internal Modules -->
-  <script src="assets/app.js"></script>
-  <script src="assets/angularapp.js"></script>
-   <script src="/assets/controllers/webcamController.js"></script>
+  <script src="/js/app.js"></script>
+   <script src="/js/controllers/webcamController.js"></script>
    <script src="/js/controllers/mainController.js"></script>
    <script src="/js/services/oauthKeys.js"></script>
    <script src="/js/services/token.js"></script>
-   <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
+   <link rel="stylesheet" type="text/css" href="/css/app.css">
 
 
 </head>
@@ -39,7 +38,44 @@
       <hr>
       <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
       <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
-      <p>Made with <i class="fa fa-heart"></i> by General Assembly</p>
+ 
+      <button class="github" ng-click="main.authenticate('instagram')"><i class="fa fa-github-square"></i> Sign in with Insgram</button>
+
+
+     
+      <form ng-submit="main.login()">
+        Login with email address and password
+        <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
+        <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
+        <input type="submit" id="submit" value="Submit" />
+     </form>
+
+
+     <form ng-submit="main.register()">
+       Login with email address and password
+       <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
+       <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
+       <input type="submit" id="submit" value="Submit" />
+     </form>
+
+
+     <h3>Register</h3>
+     <form ng-submit="main.register()" novalidate>
+       <label for="username">Username</label>
+       <input type="text" name="username" placeholder="Username" ng-model="main.currentUser.username">
+
+       <label for="email">Email</label>
+       <input type="email" name="email" placeholder="Email" ng-model="main.currentUser.email">
+
+       <label for="password">Password</label>
+       <input type="password" name="password" placeholder="Password" ng-model="main.currentUser.password">
+
+       <label for="passwordConfirmation">Password Confirmation</label>
+       <input type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="main.currentUser.passwordConfirmation">
+
+       <input type="submit" value="Register">
+     </form>
+
     </div>
 
 
@@ -115,7 +151,5 @@
 
 </video>
 
-
- -->
 </body>
 </html>
