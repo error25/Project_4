@@ -7,9 +7,9 @@ var knox    = require('knox');
 var fs = require('fs');
 var gm = require('gm');
 var port    = process.env.PORT || 8000;
-var imageStore = "https://s3-eu-west-1.amazonaws.com/betterside/" 
-var AWS = require('aws-sdk');
+var imageStore = "https://s3-eu-west-1.amazonaws.com/betterside/";
 var s3 = require('s3');
+
  
 var client = s3.createClient({
   maxAsyncS3: 20,     // this is the default 
@@ -24,6 +24,8 @@ var client = s3.createClient({
     // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property 
   },
 });
+
+//project4-wdi
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -56,10 +58,10 @@ fs.writeFile(username + '.gif', buf, function(err) {
 }
 var gifFramesEachLoop = function(username) {
 var i = 0;
-  while (i < 1){
+  while (i < 5){
     writeGifFramesLocal(username + ".gif[" + i + "]", i, username);
-    i++  
-  }
+   i++  
+ }
 }
 /////////Write Individual Image Frames
 var writeGifFramesLocal = function(localgif, i, username){
@@ -68,19 +70,18 @@ gm(localgif)
   if (err) console.log('aaw, shucks' + err);
   frameSaved = username + i + '.png';
   console.log("successfully saved locally :" + frameSaved );
-  framesToAmazon(frameSaved);
+  framesToAmazon(frameSaved, username);
   });
 }
  /////////////////////////////////
-var framesToAmazon = function(individualframe){
 
+var framesToAmazon = function(localfile, username){ 
   var params = {
-    localFile: individualframe, //"some/local/file",
+    localFile: localfile,
+   
     s3Params: {
-      Bucket: "betterside",
-      Key: individualframe, //"some/remote/file",
-      // other options supported by putObject, except Body and ContentLength. 
-      // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property 
+      Bucket: "project4-wdi",
+      Key: username + "/" + localfile,
     },
   };
   var uploader = client.uploadFile(params);
@@ -92,79 +93,18 @@ var framesToAmazon = function(individualframe){
               uploader.progressAmount, uploader.progressTotal);
   });
   uploader.on('end', function() {
-    console.log("done uploading" + individualframe);
-    
-
+    console.log("done uploading");
   });
-}
+
+};
 
 
 
 
 
 
-var uploadtoAmazon = function(imageBase64){ 
-  buf = new Buffer(imageBase64.replace(/^data:image\/\w+;base64,/, ""),'base64')
-var data = {
-  Key: "quicktest.gif",
-  Body: buf,
-  ContentEncoding: 'base64',
-  ContentType: 'image/gif'
-  };
-  s3Bucket.putObject(data, function(err, data){
-    if (err) { 
-      console.log(err);
-      console.log('Error uploading data: ', data); 
-      } else {
-        console.log('succesfully uploaded the image!');
-        console.log("image is stored at: " + imageStore + "quicktest.gif")
 
-        }
-    });
- }
-
-
-/*io.on('connect', function(socket) {
-  console.log("User connected with socket id of: " + socket.conn.id);
-  socket.on('message', function(message) {
-  console.log(message.lastimage);
-
-  var base64Data = req.rawBody.replace(/^data:image\/png;base64,/, "");
-
-  require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
-    console.log(err);
-    });
-    io.emit('message', message);
-  });
-});*/
-  //create knox AWS client.
- // var AWSclient = knox.createClient({
-  //  key: process.env.AWS_ACCESS_KEY,
-   // secret: process.env.AWS_SECRET_KEY,
-   // bucket: betterside
- // });
-
- /*     var img = message.lastimage[0]; // just get the first (for the moment).
-      var data = img.replace(/^data:image\/\w+;base64,/, "");
-      var buf = new Buffer(data, 'base64');
-
-      var re = AWSclient.put(message.username._id+'.png', {
-        'Content-Length': buf.length,
-        'Content-Type': 'img/png'
-      });
-    re.on('response', function(resp){
-        if(200 == resp.statusCode) {
-          console.log("Uploaded to" + re.url);
-// */          //io.emit('message', message);
-//             }
-//             if(error) console.log(error);
-//             else{
-
-//             };
-//         });
-//   })
-// }); // end of socket
-
+   
 /*
 READ THIS BEFORE YOU CONTINUE TOMORROW ////////////// 
 http://stackoverflow.com/questions/7511321/uploading-base64-encoded-image-to-amazon-s3-via-node-js
