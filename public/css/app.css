@@ -1,5 +1,20 @@
 .avatar {
   border-radius: 100px;
+  max-width: 20vh;
+}
+logo {
+  font-family: 'Lobster', cursive;
+  font-size: 12vh;
+}
+.topNavLoginBar {
+  align-self: right;
+  right: 0px;
+  top: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  position: fixed;
+  z-index: 2;
+  text-align: left;
 }
 
 #message-panel {
