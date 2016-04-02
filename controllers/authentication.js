@@ -183,8 +183,11 @@ function github(req,res) {
   // Step 1. Exchange authorization code for access token.
   request.post({ url: accessTokenUrl, form: params, json: true }, function(error, response, body) {
 
+      console.log("INSTAGRAM_ACCESS_TOKEN is -> " + body.access_token);
+
     // Step 2a. Link user accounts.
     if (req.headers.authorization) {
+
 
       User.findOne({ instagramId: body.user.id }, function(err, existingUser) {
 
