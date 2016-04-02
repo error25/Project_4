@@ -9,9 +9,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.min.js"></script>
   <script src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
   <script src="/vendor/satellizer/satellizer.min.js"></script>
-  <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <!-- External CSS Frameworks -->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -27,98 +28,33 @@
 
 
 </head>
-
-
-<body  ng-controller="webcamController as webcam">
-
-  <main class="container" ng-controller="MainController as main">
+<body ng-controller="MainController as main">
 
   <nav class="tabs">
-    <a ui-sref-active="active" ui-sref="home">My List</a>
-    <a ui-sref-active="active" ui-sref="archive">Archive</a>
-    <a ui-sref-active="active" ui-sref="about">about</a>
-  </nav>
-  <section ui-view>
+  <a ui-sref-active="active" ui-sref="front">Front page</a>
+  <a ui-sref-active="active" ui-sref="login">Login</a>
+  <a ui-sref-active="active" ui-sref="register">Register</a>
+  <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a>
+ </nav>
+
+ <!--  HEADER -->
+   <div ng-show="main.isLoggedIn()">
+     <img ng-src="{{ main.currentUser.picture }}" class="avatar">
+     <h2>{{ main.currentUser.name }}</h2>
+     <hr>
+     <button class="logout" ng-click="main.logout()"><i class="fa fa-sign-out"></i> Logout</button>
+   </div>
+ </div>
+
+ <!--  VIEW -->
+ <main ui-view>
 
 
-  </section>
-
-  
-
-    </div>
-
-
-      <div ng-show="main.isLoggedIn()">
-        <img ng-src="{{ main.currentUser.picture }}">
-        <h2>{{ main.currentUser.name }}</h2>
-        <hr>
-        <button class="logout" ng-click="main.logout()"><i class="fa fa-sign-out"></i> Logout</button>
-      </div>
-    </div>
-
-    <h1>Angular Chat</h1>
-
-    <div ng-hide="webcam.hasSetUsername">
-      <form ng-submit="webcam.setUsername()">
-        <div class="form-group">
-          <input ng-model="webcam.username" class="form-control" placeholder="Username">
-        </div>
-
-        <button class="btn btn-primary">Start Chatting!</button>
-      </form>
-    </div>
-
-    <div ng-show="webcam.hasSetUsername">
-      <div id="message-panel">
-        <ul>
-          <li ng-repeat="message in webcam.messages track by $index" ng-class="{ me: message.username === webcam.username }">
-            <span class="message">{{ message.text }}</span>
-            <span class="username">{{ message.username }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <form ng-submit="webcam.sendMessage()" class="form-inline">
-        <div class="form-group">
-          <input ng-model="webcam.message" class="form-control">
-        </div>
-
-        <button class="btn btn-primary">Send</button>
-      </form>
-    </div>
-
-<div class="sideleft col-md-3"></div>
-
-
-<h1>Vince Lynch</h1>
-<h4>Web & Psychology</h4>
-{{ main.helloworld }}
+ </main> 
 
 
 
 
-
-
-<section class="container">
-
-
-
-
-<h1>Webcam Ideas Test</h1>
-
-
- 
-
-<button ng-click="webcam.makeAnimatedGif()">Make Animated Gif</button>
-
-
-
-<!-- Fairly sure I need the below line for Mobile -->
-<input type="file" accept="image/*;capture=camera">
-<video autoplay="true" id="videoElement">
-
-
-</video>
 
 </body>
 </html>

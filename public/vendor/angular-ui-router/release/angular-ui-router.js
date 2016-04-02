@@ -1,3 +1,5 @@
+console.log("Angular router UI script file loaded");
+
 /**
  * State-based routing for AngularJS
  * @version v0.2.18

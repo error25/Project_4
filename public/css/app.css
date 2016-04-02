@@ -1,3 +1,7 @@
+.avatar {
+  border-radius: 100px;
+}
+
 #message-panel {
   height: calc(80vh - 50px);
   border: 1px solid #ddd;
