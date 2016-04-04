@@ -1,0 +1,197 @@
+ 
+<div style="display: inline-block; height: 24px; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<div class="fb-like" data-width="24" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+</div>
+,
+<div style="display: inline-block; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Numbeo" data-related="mladenadamovic" rel="nofollow">Tweet</a></div>
+,Cost of Living Index (Excl.Rent): ,
+<div style="display: inline-block; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<div class="g-plusone" data-size="medium"></div>
+</div>
+,
+88.38,Rent Index: ,
+48.82,Groceries Index: ,
+76.86,Restaurants Index: ,
+85.32,Cost of Living Plus Rent Index: ,
+<div style="display: inline-block; width: 100%; margin-top: 10px; margin-bottom: 10px; text-align: right; vertical-align: bottom">
+<nav style="display: inline-block; vertical-align: middle;">
+<div class="standard_margin_inlineblock">
+      <form action="http://www.numbeo.com/common/dispatcher.jsp" method="get" id="menu_dispatch_form" style="display: inline; padding: 0; margin:0;">
+      <input type="hidden" name="where" value="http://www.numbeo.com/cost-of-living/city_result.jsp" style="display: inline; padding:0; margin:0;">
+<input id="city_selector_menu_city_id" size="35" type="text" placeholder="Select City (Cost of Living)" class="ui-corner-all city-selector-menu">
+<input type="hidden" id="menu_city_id" name="city_id">
+<input type="hidden" id="name_menu_city_id" name="name_city_id">
+      </form>
+</div>
+ <script type="text/javascript">
+  jQuery(document).ready(function($) {
+  	jQuery('#city_selector_menu_city_id').autocomplete({
+  	  source: 'http://www.numbeo.com/common/CitySearchJson',
+     minLength: 1,
+     delay: 3,
+     autoFocus: true,
+     select: function(event, ui) {
+         event.preventDefault();
+         $('#city_selector_menu_city_id').val(ui.item.label);
+         $('#menu_city_id').val(ui.item.value);
+jQuery('#menu_dispatch_form').submit();     },
+     focus: function(event, ui) {
+         event.preventDefault();
+     }
+	  })   .keydown(function(e){
+	    if (e.keyCode === 13){
+      if ($('#menu_city_id').val() == '') { 
+        e.preventDefault();
+      }
+      var val = $('#city_selector_menu_city_id').val();
+		   $('#name_menu_city_id').val(val);
+	   }
+  }); // end autocompleter definition
+$('#city_selector_menu_city_id').toggleClass('city-selector-menu');
+$('#city_selector_menu_city_id').toggleClass('city-selector-menu');
+ }); // end document ready 
+</script>
+</nav>
+<nav style="display: inline-block; vertical-align: middle; padding-left: 0.5em;">
+<div class="standard_margin_inlineblock">
+<select name="city_result_switcher" id="city_result_switcher" onchange="window.location = this.value;" class="result_switcher ui-corner-all">
+<option value="" selected="selected">What are you looking for?</option>
+<option value="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Cost of Living in Brighton</option>
+<option value="http://www.numbeo.com/crime/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Crime in Brighton</option>
+<option value="http://www.numbeo.com/climate/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Climate in Brighton</option>
+<option value="http://www.numbeo.com/food-prices/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Food Prices in Brighton</option>
+<option value="http://www.numbeo.com/gas-prices/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Gas Prices in Brighton</option>
+<option value="http://www.numbeo.com/health-care/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Health Care in Brighton</option>
+<option value="http://www.numbeo.com/travel-prices/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Travel Prices in Brighton</option>
+<option value="http://www.numbeo.com/pollution/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Pollution in Brighton</option>
+<option value="http://www.numbeo.com/property-investment/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Property Prices in Brighton</option>
+<option value="http://www.numbeo.com/quality-of-life/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Quality of Life in Brighton</option>
+<option value="http://www.numbeo.com/taxi-fare/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Taxi Fares in Brighton</option>
+<option value="http://www.numbeo.com/traffic/city_result.jsp?country=United+Kingdom&amp;city=Brighton">Traffic in Brighton</option>
+</select>
+
+</div>
+</nav>
+</div>
+,
+<a href="http://www.numbeo.com/cost-of-living/" style="border: 0; text-decoration:none;">
+<img src="http://www.numbeo.com/images/numbeo_icon.svg" style="height: 62px; vertical-align: bottom; border: 0;" alt=""><img src="http://www.numbeo.com/images/numbeo_text.svg" style="height: 34px; margin-left: 1em; margin-bottom: 8px; vertical-align: bottom; border: 0;" alt="NUMBEO"></a>
+,
+69.63,Local Purchasing Power: ,
+88.60,Meal, Inexpensive Restaurant , 10.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+8.00</span><span class="barLeft" style="width: 14px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 14px;"></span><span class="barTextRight">12.00</span>,Meal for 2 People, Mid-range Restaurant, Three-course , 50.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+40.00</span><span class="barLeft" style="width: 14px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 14px;"></span><span class="barTextRight">60.00</span>,McMeal at McDonalds (or Equivalent Combo Meal) , 6.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+4.95</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 12px;"></span><span class="barTextRight">7.00</span>,Domestic Beer (0.5 liter draught) , 3.90&#xA0;&#xA3;,
+<span class="barTextLeft">
+3.00</span><span class="barLeft" style="width: 15px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 4px;"></span><span class="barTextRight">4.10</span>,Imported Beer (0.33 liter bottle) , 3.95&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.60</span><span class="barLeft" style="width: 23px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 2px;"></span><span class="barTextRight">4.00</span>,Cappuccino (regular) , 2.45&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.00</span><span class="barLeft" style="width: 11px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 8px;"></span><span class="barTextRight">2.70</span>,Coke/Pepsi (0.33 liter bottle) , 1.31&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.00</span><span class="barLeft" style="width: 16px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 16px;"></span><span class="barTextRight">1.59</span>,Water (0.33 liter bottle)  , 0.98&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.90</span><span class="barLeft" style="width: 4px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 2px;"></span><span class="barTextRight">1.00</span>,Milk (regular), (1 liter) , 1.13&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.70</span><span class="barLeft" style="width: 27px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 37px;"></span><span class="barTextRight">1.69</span>,Loaf of Fresh White Bread (500g) , 1.35&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.70</span><span class="barLeft" style="width: 34px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 26px;"></span><span class="barTextRight">1.82</span>,Rice (white), (1kg) , 0.84&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.45</span><span class="barLeft" style="width: 33px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 14px;"></span><span class="barTextRight">1.00</span>,Eggs (12) , 2.63&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.00</span><span class="barLeft" style="width: 16px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 10px;"></span><span class="barTextRight">3.00</span>,Local Cheese (1kg) , 7.03&#xA0;&#xA3;,
+<span class="barTextLeft">
+6.00</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 10px;"></span><span class="barTextRight">8.00</span>,Chicken Breasts (Boneless, Skinless), (1kg) , 6.81&#xA0;&#xA3;,
+<span class="barTextLeft">
+5.00</span><span class="barLeft" style="width: 18px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 13px;"></span><span class="barTextRight">8.00</span>,Beef Round (1kg) (or Equivalent Back Leg Red Meat) , 9.70&#xA0;&#xA3;,
+<span class="barTextLeft">
+8.00</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 21px;"></span><span class="barTextRight">12.50</span>,Apples (1kg) , 2.33&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.00</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 21px;"></span><span class="barTextRight">3.00</span>,Banana (1kg) , 1.66&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.00</span><span class="barLeft" style="width: 28px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 15px;"></span><span class="barTextRight">2.00</span>,Oranges (1kg) , 2.62&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.00</span><span class="barLeft" style="width: 17px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 38px;"></span><span class="barTextRight">4.00</span>,Tomato (1kg) , 2.21&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.75</span><span class="barLeft" style="width: 14px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 26px;"></span><span class="barTextRight">3.00</span>,Potato (1kg) , 1.27&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.00</span><span class="barLeft" style="width: 15px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 42px;"></span><span class="barTextRight">2.00</span>,Onion (1kg) , 1.23&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.70</span><span class="barLeft" style="width: 31px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 46px;"></span><span class="barTextRight">2.00</span>,Lettuce (1 head) , 0.94&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.80</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 5px;"></span><span class="barTextRight">1.00</span>,Water (1.5 liter bottle) , 1.19&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.80</span><span class="barLeft" style="width: 23px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 19px;"></span><span class="barTextRight">1.50</span>,Bottle of Wine (Mid-Range) , 7.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+6.00</span><span class="barLeft" style="width: 10px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 52px;"></span><span class="barTextRight">12.00</span>,Domestic Beer (0.5 liter bottle) , 1.62&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.50</span><span class="barLeft" style="width: 5px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 5px;"></span><span class="barTextRight">1.75</span>,Imported Beer (0.33 liter bottle) , 1.75&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.50</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 10px;"></span><span class="barTextRight">2.00</span>,Pack of Cigarettes (Marlboro) , 9.65&#xA0;&#xA3;,
+<span class="barTextLeft">
+7.50</span><span class="barLeft" style="width: 15px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 7px;"></span><span class="barTextRight">10.59</span>,One-way Ticket (Local Transport) , 2.40&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.20</span><span class="barLeft" style="width: 4px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 6px;"></span><span class="barTextRight">2.60</span>,Monthly Pass (Regular Price) , 69.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+50.00</span><span class="barLeft" style="width: 18px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 1px;"></span><span class="barTextRight">69.00</span>,Taxi Start (Normal Tariff) , 2.80&#xA0;&#xA3;,
+<span class="barTextLeft">
+2.40</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 18px;"></span><span class="barTextRight">3.50</span>,Taxi 1km (Normal Tariff) , 1.24&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.00</span><span class="barLeft" style="width: 13px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 7px;"></span><span class="barTextRight">1.36</span>,Taxi 1hour Waiting (Normal Tariff) , 21.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+20.00</span><span class="barLeft" style="width: 3px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 52px;"></span><span class="barTextRight">36.00</span>,Gasoline (1 liter) , 1.12&#xA0;&#xA3;,
+<span class="barTextLeft">
+1.08</span><span class="barLeft" style="width: 1px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 5px;"></span><span class="barTextRight">1.20</span>,Volkswagen Golf 1.4 90 KW Trendline (Or Equivalent New Car) , 20,000.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+18,000.00</span><span class="barLeft" style="width: 6px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 11px;"></span><span class="barTextRight">23,000.00</span>,Basic (Electricity, Heating, Water, Garbage) for 85m2 Apartment , 194.86&#xA0;&#xA3;,
+<span class="barTextLeft">
+110.00</span><span class="barLeft" style="width: 31px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 40px;"></span><span class="barTextRight">300.00</span>,1 min. of Prepaid Mobile Tariff Local (No Discounts or Plans) , 0.10&#xA0;&#xA3;,
+<span class="barTextLeft">
+0.03</span><span class="barLeft" style="width: 40px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 35px;"></span><span class="barTextRight">0.15</span>,Internet (10 Mbps, Unlimited Data, Cable/ADSL) , 21.37&#xA0;&#xA3;,
+<span class="barTextLeft">
+16.00</span><span class="barLeft" style="width: 17px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 13px;"></span><span class="barTextRight">25.00</span>,Fitness Club, Monthly Fee for 1 Adult , 37.22&#xA0;&#xA3;,
+<span class="barTextLeft">
+25.00</span><span class="barLeft" style="width: 23px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 15px;"></span><span class="barTextRight">45.00</span>,Tennis Court Rent (1 Hour on Weekend) , 8.50&#xA0;&#xA3;,
+<span class="barTextLeft">
+7.00</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 12px;"></span><span class="barTextRight">10.00</span>,Cinema, International Release, 1 Seat , 10.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+9.00</span><span class="barLeft" style="width: 7px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 14px;"></span><span class="barTextRight">12.00</span>,1 Pair of Jeans (Levis 501 Or Similar) , 60.62&#xA0;&#xA3;,
+<span class="barTextLeft">
+50.00</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 11px;"></span><span class="barTextRight">70.00</span>,1 Summer Dress in a Chain Store (Zara, H&amp;M, ...) , 36.56&#xA0;&#xA3;,
+<span class="barTextLeft">
+25.00</span><span class="barLeft" style="width: 22px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 27px;"></span><span class="barTextRight">50.00</span>,1 Pair of Nike Running Shoes (Mid-Range) , 66.82&#xA0;&#xA3;,
+<span class="barTextLeft">
+60.00</span><span class="barLeft" style="width: 6px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 14px;"></span><span class="barTextRight">80.00</span>,1 Pair of Men Leather Business Shoes , 97.50&#xA0;&#xA3;,
+<span class="barTextLeft">
+70.00</span><span class="barLeft" style="width: 19px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 17px;"></span><span class="barTextRight">120.00</span>,Apartment (1 bedroom) in City Centre , 878.57&#xA0;&#xA3;,
+<span class="barTextLeft">
+800.00</span><span class="barLeft" style="width: 5px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 10px;"></span><span class="barTextRight">1,000.00</span>,Apartment (1 bedroom) Outside of Centre , 758.33&#xA0;&#xA3;,
+<span class="barTextLeft">
+650.00</span><span class="barLeft" style="width: 9px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 9px;"></span><span class="barTextRight">850.00</span>,Apartment (3 bedrooms) in City Centre , 1,722.73&#xA0;&#xA3;,
+<span class="barTextLeft">
+1,500.00</span><span class="barLeft" style="width: 8px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 12px;"></span><span class="barTextRight">2,000.00</span>,Apartment (3 bedrooms) Outside of Centre , 1,354.55&#xA0;&#xA3;,
+<span class="barTextLeft">
+1,200.00</span><span class="barLeft" style="width: 7px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 8px;"></span><span class="barTextRight">1,500.00</span>,Price per Square Meter to Buy Apartment in City Centre , 3,650.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+3,000.00</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 27px;"></span><span class="barTextRight">5,000.00</span>,Price per Square Meter to Buy Apartment Outside of Centre , 2,425.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+2,000.00</span><span class="barLeft" style="width: 12px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 17px;"></span><span class="barTextRight">3,000.00</span>,Average Monthly Disposable Salary (Net After Tax) , 1,538.00&#xA0;&#xA3;,
+<span class="barTextLeft">
+1,200.00</span><span class="barLeft" style="width: 15px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 18px;"></span><span class="barTextRight">1,927.00</span>,Mortgage Interest Rate in Percentages (%), Yearly , 3.97,
+<span class="barTextLeft">
+3.00</span><span class="barLeft" style="width: 16px;"></span><span class="barMid"><span class="barMid-nocss">-</span></span><span class="barRight" style="width: 10px;"></span><span class="barTextRight">4.50</span>, 
+<div style="display: inline-block; height: 24px; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<div class="fb-like" data-width="24" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+</div>
+,
+<div style="display: inline-block; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Numbeo" data-related="mladenadamovic" rel="nofollow">Tweet</a></div>
+,
+<div style="display: inline-block; max-height: 24px; overflow-y: hidden; min-width: 1px;">
+<div class="g-plusone" data-size="medium"></div>
+</div>
+,URL: ,<input type="text" id="href" name="href" size="50">,Description: ,<input type="text" id="href_name" name="href_text" size="50">,<input type="submit" value="Add"> ,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Crawley" class="likenormal"><span>Cost of Living in </span><span class="like_a">Crawley</span></a>,35.63 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Bexhill+On+Sea" class="likenormal"><span>Cost of Living in </span><span class="like_a">Bexhill On Sea</span></a>,51.08 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Croydon" class="likenormal"><span>Cost of Living in </span><span class="like_a">Croydon</span></a>,69.79 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Portsmouth" class="likenormal"><span>Cost of Living in </span><span class="like_a">Portsmouth</span></a>,79.37 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Kingston+Upon+Thames" class="likenormal"><span>Cost of Living in </span><span class="like_a">Kingston Upon Thames</span></a>,84.09 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=London" class="likenormal"><span>Cost of Living in </span><span class="like_a">London</span></a>,85.17 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Southwark" class="likenormal"><span>Cost of Living in </span><span class="like_a">Southwark</span></a>,85.44 km,<a href="http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&amp;city=Westminster" class="likenormal"><span>Cost of Living in </span><span class="like_a">Westminster</span></a>,87.08 km,

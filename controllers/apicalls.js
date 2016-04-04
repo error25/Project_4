@@ -65,78 +65,43 @@ function instagramR(req,res){
   });
 }
 
-/*// example AJAX test page 
-const URL = 'http://jiahaog.github.io/ajax-test-page/';
- 
-// selector for AJAX content 
-const SELECTOR = '#setTimeoutContent';
- 
-// create a browser 
-var browser = new Revenant();
- 
-browser
-    .openPage(URL)
-    .then(function () {
-      console.log("reached attempt to open page")
-        return browser.waitForElement(SELECTOR);
-    })
-    .then(function () {
-        return browser.getInnerHTML(SELECTOR);
-    })
-    .then(function (result) {
-        console.log(result); // 'BUBBLES' 
- 
-        // kills the PhantomJS process 
-        browser.done();
- 
-    }).catch(function (error) {
-      console.log(error);
-        browser.done();
-    });*/
 
 
-/*
-function instagramCity(req, res){
-     var urltoScrape = req.params.id;
+function numCity(req, res){
 
-     // write file to store SCRAPED data in a comma seperated list.
-   //  fs.writeFile('scraped.txt', 'Hello World!', function (err) {
-     //  if (err) return console.log(err);
-   //    console.log('Hello World > scraped.txt');
- //    });
-       url = "http://www.gramfeed.com/instagram/map#/36.1699,-115.1398/1000/-"; // URL to scrape
+  var city = req.params.city
+  var country = req.params.country
+
+  url = "http://www.numbeo.com/cost-of-living/city_result.jsp?country=" + country + "&city=" + city + "";
+
+       //url = "http://www.numbeo.com/cost-of-living/city_result.jsp?country=United+Kingdom&city=Brighton"; // URL to scrape
      request(url, function (error, response, body) {
       console.log(body)
        if (!error) {
          var $ = cheerio.load(body),
-           fetched_data = $('img').attr('src'); // test that you can scrape a single jquery element selector
+           fetched_data = $('td').html(); // test that you can scrape a single jquery element selector
          console.log("The data retrieved says:" + fetched_data + "," ); // 
 
+         tdArr = [];
 
-     $( "img" ).each(function( index ) {
-         console.log( index + ": " + $(this).attr('src') ); // dont console log
-           fs.appendFile('scraped.txt', $(this).attr('src') + "," , function (err) {
-           });
-     });
+       $('td').each(function( index ) {
+           console.log( index + ": " + $(this).text() ); //
+           tdArr.push($(this).text());
+       });
+
+       return res.status(200).json({data: tdArr });
+
        } else {
          console.log("We’ve encountered an error: " + error);
        }
      });
      // End of scraping functionality.
 
-     setTimeout(function(){ //wait 8 seconds until we check the file for the data to be stored
 
-       fs.readFile("scraped.txt", "utf8", function (error, data) {
-               console.log("The current data file (stored on server) contains:" + data);
-               var html = 'You scraped: ' + urltoScrape + '.<br>' +
-                          '<a href="/">Try again.</a><br><br><p></p>' + data;
-               res.send(html);
-           }); // only shows webpage after 8 seconds
-     },8000)
-
-   }*/
+   }
 
 
    module.exports = {
-     instagramR: instagramR
+     instagramR: instagramR,
+     numCity: numCity
    };

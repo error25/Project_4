@@ -12,6 +12,9 @@ router.post('/auth/login', authController.login);
 
 
 // http://localhost:8000/api/instagram/51.5285/-0.0847 returns JSON images.images[0]
-router.get('/api/instagram/:lat/:lng', apiController.instagramR)
+router.get('/api/instagram/:lat/:lng', apiController.instagramR);
+
+//http://localhost:8000/api/numcity/lisbon/portugal
+router.get('/api/numcity/:city/:country', apiController.numCity);
 
 module.exports = router;

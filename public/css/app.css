@@ -6,6 +6,15 @@ logo {
   font-family: 'Lobster', cursive;
   font-size: 12vh;
 }
+
+.instaPhoto {
+overflow: hidden;
+}
+.instaPhoto img{
+margin-top: 0px;
+width: 250px;
+}
+
 .topNavLoginBar {
   align-self: right;
   right: 0px;

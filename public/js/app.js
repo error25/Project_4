@@ -59,7 +59,12 @@ function Router($stateProvider, $urlRouterProvider){
     .state('register',{
       url: '/login',
       templateUrl: 'login.html'
+    })
+    .state('instacity',{
+      url: '/instacity',
+      templateUrl: 'instacity.html'
     });
+    
 
     $urlRouterProvider.otherwise('/');
   

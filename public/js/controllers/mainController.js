@@ -11,7 +11,36 @@ function MainController($auth, tokenService, $resource) {
   self.currentLocation = {};
   self.helloworld = "hello Angular";
   self.instagrams = [];
+  self.searchPlace = {};
 
+
+this.returnCapital = function(country){
+
+  for (i=0; i<Cities;i++){
+     //do something
+     console.log(Cities[i])
+      
+   }
+
+  // angular.forEach(Cities.name, function(value, key) {
+    
+  //     console.log(value);
+  //   }
+  // });
+
+/*  console.log("returnCapital() function has been called")
+  self.searchPlace.country = country;
+  console.log("console.log (Cities.length)" + Cities.length);
+  for(var i=0; i<Cities.length; i++) {
+           if (Cities[i].name  === country) {
+            console.log("This never gets called" + country);
+               console.log("Found: "+Cities[i].capital);
+               self.searchPlace.city = Cities[i].capital;
+               return Cities[i].capital;
+               break;
+           }
+       }*/
+  }
 
   var Instagram = $resource('http://localhost:8000/api/instagram/:lat/:lng', {}, {
     get: { cache: true, method: 'get' }
