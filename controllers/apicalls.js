@@ -9,7 +9,66 @@ var Revenant = require('revenant');
 
 var phantom = require('node-phantom');
 var driver = require('node-phantom-simple');
+var tabletojson = require('tabletojson');
+var Wiki = require('wikijs');
 
+
+
+
+function wikicity(req,res){
+  city = req.params.city;
+  var wiki = new Wiki();
+  wiki.page(city).then(function(page) {
+    page.info().then(function(info) {
+      console.log(info); // Bruce Wayne 
+      return res.status(200).json({wikisummary: info});
+    });
+  });
+   
+/*  var url = "https://en.wikipedia.org/wiki/Oslo";
+  tabletojson.convertUrl(url)
+  .then(function(tablesAsJson) {
+    var summary = tablesAsJson[0];
+    return res.status(200).json({summary: summary});
+  });*/
+}
+
+function numtable(req,res){
+
+  var city = req.params.city
+  var country = req.params.country
+ // country = "portugal";
+ // city = "city";
+
+  var url = "http://www.numbeo.com/cost-of-living/city_result.jsp?country=" + country + "&city=" + city + "";
+  //var url = "http://www.numbeo.com/cost-of-living/city_result.jsp?country=Portugal&city=Lisbon";
+  tabletojson.convertUrl(url)
+  .then(function(tablesAsJson) {
+    var headers = tablesAsJson[0];
+    var rows = tablesAsJson[1];
+    var summary = tablesAsJson[2];
+    var details = tablesAsJson[3];
+
+    return res.status(200).json({summary: summary, details: details});
+  });
+
+}
+
+
+function wikitable(req,res){
+
+  wikipage = req.params.wikipage;
+
+  var url = 'https://en.wikipedia.org/wiki/' + wikipage;
+  tabletojson.convertUrl(url)
+  .then(function(tablesAsJson) {
+    var headers = tablesAsJson[0];
+    var rows = tablesAsJson[1];
+
+    return res.status(200).json({headers: headers, rows: rows});
+  });
+
+}
 
 //http://ramblr.us/?q=Barcelona,%20Spain (HMMM doesnt work, )
 
@@ -103,5 +162,8 @@ function numCity(req, res){
 
    module.exports = {
      instagramR: instagramR,
-     numCity: numCity
+     numCity: numCity,
+     wikitable: wikitable,
+     numtable: numtable,
+     wikicity: wikicity
    };

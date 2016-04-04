@@ -63,6 +63,10 @@ function Router($stateProvider, $urlRouterProvider){
     .state('instacity',{
       url: '/instacity',
       templateUrl: 'instacity.html'
+    })
+    .state('city', {
+      url: '/:city/:country',
+      templateUrl: 'city.html'
     });
     
 

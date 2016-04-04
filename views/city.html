@@ -1,0 +1,29 @@
+
+
+
+{{main.helloworld}}
+
+<h1>{{main.selected.city }} , {{main.selected.country}} </h1>
+
+
+<ul>
+<h3>{{main.selected.city }} WikiData</h3>
+
+<span>Population_Metro: {{main.wikicity.wikisummary.population_metro}}</span>
+</ul>
+
+
+<ul>
+<h3>{{main.selected.city }} Summary</h3>
+<li ng-repeat="summary in main.summary track by $index">
+<span>{{summary.Index}}</span> : <span>{{summary[1]}}</span>
+</li>
+</ul>
+
+
+<ul>
+<h3>{{main.selected.city }} Details</h3>
+<li ng-repeat="detail in main.detailed track by $index">
+<span>{{detail['Salaries And Financing']}}</span> : <span>{{detail[2]}}</span>
+</li>
+</ul>

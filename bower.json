@@ -23,7 +23,7 @@
     "angular-jwt": "^0.0.9",
     "satellizer": "^0.14.0",
     "angular-ui-router": "ui-router#^0.2.18",
-    "hanselsen/ngTour": "ng-route#*"
+    "lodash": "^4.8.0"
   },
   "resolutions": {
     "angular": "^1.2.16"

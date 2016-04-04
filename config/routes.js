@@ -17,4 +17,15 @@ router.get('/api/instagram/:lat/:lng', apiController.instagramR);
 //http://localhost:8000/api/numcity/lisbon/portugal
 router.get('/api/numcity/:city/:country', apiController.numCity);
 
+// http://localhost:8000/api/wikitable/List_of_countries_by_inequality-adjusted_HDI
+router.get('/api/wikitable/:wikipage', apiController.wikitable);
+
+// http://localhost:8000/api/numtable/lisbon/portugal <-- BETTER DATA
+router.get('/api/numtable/:city/:country', apiController.numtable);
+
+http://localhost:8000/api/wikicity/:city
+router.get('/api/wikicity/:city', apiController.wikicity);
+
+
+
 module.exports = router;
