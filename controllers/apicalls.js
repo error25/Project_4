@@ -58,7 +58,7 @@ function instagramR(req,res){
               return res.status(200).json({images: result });
               browser.exit();
             });
-          }, 2000);
+          }, 900);
         });
       });
     });

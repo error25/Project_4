@@ -1,2 +1,20 @@
+<section ng-controller="MainController as main">
 
 <h1>Front Page</h1>
+{{main.helloworld}}
+
+
+<input type="button" value="Show Location"
+    ng-click="main.showlocation()" />   <br/>
+ 
+Latitude: <span id="latitude">{{main.currentLocation.lat}}</span>       <br/>
+ 
+Longitude: <span id="longitude">{{main.currentLocation.lng}}</span>
+...
+
+<div ng-repeat="src in main.instagrams track by $index">
+  <img ng-src="{{src}}"/>
+</div>
+
+
+</section>
