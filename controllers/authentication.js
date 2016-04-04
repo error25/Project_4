@@ -177,6 +177,7 @@ function github(req,res) {
     redirect_uri: req.body.redirectUri,
     client_secret: process.env.INSTAGRAM_API_SECRET,
     code: req.body.code,
+    scope: 'public_content',
     grant_type: 'authorization_code'
   };
 
