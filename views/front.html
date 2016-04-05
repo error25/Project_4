@@ -1,10 +1,38 @@
 
 
-<h4>Front</h4>
+<h4>“Instead of trying to make a better robot, try to make a better man.”
+Shimon Peres</h4>
 
 <h1>Inequality-adjusted HDI</h1>
 
 <p>https://en.wikipedia.org/wiki/List_of_countries_by_inequality-adjusted_HDI</p>
+
+
+https://en.wikipedia.org/wiki/World_Happiness_Report
+
+State_of_World_Liberty_Index#2015_rankings
+
+<form name="myForm">
+  <label for="singleSelect" class="selectpicker"> Single select: </label><br>
+  <select name="singleSelect" ng-model="main.selectedWikiTable">
+    <option value="World_Happiness_Report">World_Happiness_Report</option>
+    <option value="List_of_countries_by_inequality-adjusted_HDI">Cities by inequality-adjusted_HDI</option>
+    <option value="List_of_countries_by_GDP_(nominal)_per_capita">GDP per person</option>
+    <option value="State_of_World_Liberty_Index#2015_rankings">State_of_World_Liberty_Index#2005_rankings</option>
+  </select><br>
+</form ng-blur="main.getWikiTable(main.selectedWikiTable)">
+
+
+
+<button ng-click="main.getWikiTable(main.selectedWikiTable);">Get Wiki</button>
+<ul>
+<li ng-repeat="n in main.guardianarticles track by $index">
+<h4> {{n.webTitle}} </h4>
+<span> {{n.webUrl}} </span>
+<span> {{n.webPublicationDate}} </span>
+</li>
+</ul>
+
 
 <ul>
 <li ng-repeat="n in main.wikitable track by $index">

@@ -34,54 +34,47 @@
 <body ng-controller="MainController as main">
 
 
-<header role="banner">
-  <logo id="logo-main">TheBetterSide</logo>
+<div id="menu-wrapper">
+  <div id="menu-bar"></div>
+  
+  <div id="menu-nav">
+    <ul>
+    <li> <a ui-sref-active="active" ui-sref="front">Front page</a></li>
+    <li> <a ui-sref-active="active" ui-sref="login">Login</a></li>
+    <li> <a ui-sref-active="active" ui-sref="register">Register</a></li>
+    <li> <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a></li>
+    <li> <a ui-sref-active="active" ui-sref="instacity">InstaCity</a></li>
+    </ul>
+  </div>
+  
+  <div id="menu-tab" class="closed">MENU</div>
+</div>
+
+
+
 <!-- AVATAR in NAV -->
 <section class="topNavLoginBar">
-    <div ng-show="main.isLoggedIn()">
-    <strong>{{ main.currentUser.name }}</strong>
-    <a ng-click="main.logout()"><i class="fa fa-sign-out"></i>(Logout)</a>
       <img ng-src="{{ main.currentUser.picture }}" class="avatar">
+      <div ng-show="main.isLoggedIn()">
+      <strong>{{ main.currentUser.name }}</strong>
+      <a ng-click="main.logout()"><i class="fa fa-sign-out"></i>(Logout)</a>
       <hr>
-      
   </div>
 </section>
-<nav id="navbar-primary" class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-primary-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar-primary-collapse">
-      <ul class="nav navbar-nav">
-        <li> <a ui-sref-active="active" ui-sref="front">Front page</a></li>
-        <li> <a ui-sref-active="active" ui-sref="login">Login</a></li>
-        <li> <a ui-sref-active="active" ui-sref="register">Register</a></li>
-        <li> <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a></li>
-        <li> <a ui-sref-active="active" ui-sref="instacity">InstaCity</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-</header><!-- header role="banner" -->
 
 
-<!--   <nav class="tabs">
-  <a ui-sref-active="active" ui-sref="front">Front page</a>
-  <a ui-sref-active="active" ui-sref="login">Login</a>
-  <a ui-sref-active="active" ui-sref="register">Register</a>
-  <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a>
- </nav> -->
-
- <!--  HEADER -->
+<script>
+  $(document).on('click', '#menu-tab', function () {
+    $('#menu-nav').slideToggle('slow');
+  });
+</script>
 
 
- <!--  VIEW -->
+
+
+
+<div class="content">
+  
  <main ui-view>
 
 

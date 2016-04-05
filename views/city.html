@@ -24,6 +24,7 @@
 <ul>
 <h3>{{main.selected.city }} Details</h3>
 <li ng-repeat="detail in main.detailed track by $index">
-<span>{{detail['Salaries And Financing']}}</span> : <span>{{detail[2]}}</span>
+<span>{{detail['Salaries And Financing']}}</span> :{{main.country.currencies[0]}} <span>
+{{ detail[2]}}</span>
 </li>
 </ul>
