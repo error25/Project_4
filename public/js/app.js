@@ -1,11 +1,15 @@
 angular
   .module("VinceLynch", ['ngResource', 'satellizer', 'angular-jwt', 'ui.router', 'rzModule'])
+  .constant('API_URL2', 'http://localhost:8000')
   .config(oauthConfig)
   //.config(NGRouteR); 
-  .config(Router);  
+  .config(Router);
 
-  oauthConfig.$inject = ['$authProvider', 'FACEBOOK_API_KEY', 'GITHUB_API_KEY', 'INSTAGRAM_API_KEY'];
-  function oauthConfig($authProvider, FACEBOOK_API_KEY, GITHUB_API_KEY, INSTAGRAM_API_KEY){
+
+
+
+  oauthConfig.$inject = ['$authProvider', 'FACEBOOK_API_KEY', 'GITHUB_API_KEY', 'INSTAGRAM_API_KEY', 'API_URL2'];
+  function oauthConfig($authProvider, FACEBOOK_API_KEY, GITHUB_API_KEY, INSTAGRAM_API_KEY, API_URL2){
     $authProvider.facebook({
       url: '/auth/facebook', // this is the place we are telling Satilette to tell facebook to send back its post request to.
       clientId: FACEBOOK_API_KEY
@@ -21,25 +25,14 @@ angular
        clientId: INSTAGRAM_API_KEY
      });
 
+    $authProvider.httpInterceptor = function(config) {
+        return !!config.url.match(API_URL2);
+      };
 
     $authProvider.tokenPrefix = null;
 
 }
-/////////// NG ROUTE /////////////////
-/*NGRouteR.$inject = ['$routeProvider'];
-function NGRouteR($routeProvider){
-  $routeProvider.when("/",
-    {
-      templateUrl: "home.html",
-      controller: "MainController",
-      controllerAs: "main"
-    }
-  );
-}*/
 
-
-
-///////////// UI ROUTER /////////////
 
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 function Router($stateProvider, $urlRouterProvider){
@@ -65,7 +58,7 @@ function Router($stateProvider, $urlRouterProvider){
       templateUrl: 'instacity.html'
     })
     .state('city', {
-      url: '/:city/:country',
+      url: '/place/:city/:country',
       templateUrl: 'city.html'
     });
     
@@ -73,5 +66,3 @@ function Router($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
   
 }
-
-   

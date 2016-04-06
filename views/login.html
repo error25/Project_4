@@ -1,6 +1,7 @@
 
 
-<h1>Register & Login </h1>
+<section ng-show="!main.isLoggedIn()">
+<h1>Login</h1>
 
 <div class="centered">
     <div ng-hide="main.isLoggedIn()">
@@ -12,37 +13,4 @@
  
       <button class="github" ng-click="main.authenticate('instagram')"><i class="fa fa-github-square"></i> Sign in with Insgram</button>
 
-
-     
-      <form ng-submit="main.login()">
-        Login with email address and password
-        <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
-        <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
-        <input type="submit" id="submit" value="Submit" />
-     </form>
-
-
-     <form ng-submit="main.register()">
-       Login with email address and password
-       <input type="text" ng-model="main.loginDeets.email" name="text"  placeholder="Email@address.com" />
-       <input type="text" ng-model="main.loginDeets.password" name="text" placeholder="password"  />
-       <input type="submit" id="submit" value="Submit" />
-     </form>
-
-
-     <h3>Register</h3>
-     <form ng-submit="main.register()" novalidate>
-       <label for="username">Username</label>
-       <input type="text" name="username" placeholder="Username" ng-model="main.currentUser.username">
-
-       <label for="email">Email</label>
-       <input type="email" name="email" placeholder="Email" ng-model="main.currentUser.email">
-
-       <label for="password">Password</label>
-       <input type="password" name="password" placeholder="Password" ng-model="main.currentUser.password">
-
-       <label for="passwordConfirmation">Password Confirmation</label>
-       <input type="password" name="passwordConfirmation" placeholder="Retype password" ng-model="main.currentUser.passwordConfirmation">
-
-       <input type="submit" value="Register">
-     </form>
+</section>

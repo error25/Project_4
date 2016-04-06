@@ -1,5 +1,6 @@
 module.exports = {
   port: process.env.PORT || 8000,
   databaseUrl: 'mongodb://localhost/satellizer',
-  secret: 'notVerySecret'
+  secret: 'notVerySecret',
+  appUrl: 'http://localhost:8000'
 }

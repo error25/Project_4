@@ -5,6 +5,7 @@ MainController.$inject = ['$auth', 'tokenService', '$resource', '$window', '$sta
 function MainController($auth, tokenService, $resource, $window, $state, GEOCODER_API_KEY, $http, GUARDIAN_API_KEY) {
   var self = this;
 
+
   self.loginDeets = {};
   self.currentUser = {};
   self.currentLocation = {};
@@ -81,22 +82,26 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
 
 
 
-self.convertCurrencytoUSD = function(){
-  console.log(self.detailed);
-  var i = 0;
-  while (i < self.detailed.length){
-   var firstVal = (self.detailed[i][2]).split('-', 1)[0];
-   var secondVal = (self.detailed[i][2]).split('-', 2)[1];
-   firstVal = parseFloat(firstVal);
-   secondVal = parseFloat(secondVal);
 
-   console.log(firstVal);
-   console.log(secondVal);
-   self.detailed[i][2] = parseFloat((firstVal + secondVal) / 2);
-   self.detailed[i][2] = (parseFloat(self.nomadResult.cost.exchange_rate.USD) * (self.detailed[i][2])); // to dollars
-    i++
+/// if CITY page present, then load city
+self.loadPage = function(){
+
+var placePage = ($state.href($state.current.name, $state.params, {absolute: false})).split("/")[1];
+
+/////////////////////////// GET CITY from URL Params
+  city = ($state.href($state.current.name, $state.params, {absolute: false})).split("/")[2];
+
+  if (placePage == "place"){ // definitely a place page URL?
+   
+   // callfunctions for this URL
+    this.getNomad(city)
+    self.country = self.nomadResult.info.country.name;
+    var country = self.country;
+    self.selected = {city: city, country: country};
+    self.getCityNumTableData(city,country)
+    self.getWikicityData(city)
+    self.getGeoCode();
   }
-  console.log(self.detailed[1][2])
 }
 
 self.meetmyRequirements = function(){
@@ -263,14 +268,6 @@ this.gotoCity2 = function(city){  //lodash
   self.country = self.nomadResult.info.country.name;
   var country = self.country;
 
-  console.log("city is: " + city);
-  console.log("country is: " + country);
-
-  self.selected = {city: city, country: country};
-  self.getCityNumTableData(city,country)
-  self.getWikicityData(city)
-  self.getGeoCode();
-
   $state.transitionTo('city', {city: city, country: country});
 }
 
@@ -379,7 +376,7 @@ this.getWikiTable = function(wikititle){
         var image = obj.image,
         animatedImage = document.createElement('img');
         animatedImage.src = image;
-        document.getElementById("instaGIF").appendChild(animatedImage)
+        document.getElementById("instaGIF").appendChild(animatedImage);
         //document.body.appendChild(animatedImage);
       }
     });

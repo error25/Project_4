@@ -35,6 +35,8 @@
   <script src="/js/app.js"></script>
    <script src="/js/controllers/webcamController.js"></script>
    <script src="/js/controllers/mainController.js"></script>
+
+
    <script src="/js/services/oauthKeys.js"></script>
    <script src="/js/services/token.js"></script>
    <link rel="stylesheet" type="text/css" href="/css/app.css">
@@ -49,9 +51,9 @@
 <div id="menu-wrapper">
   <div id="menu-bar"></div>
   
-  <div id="menu-nav">
+  <div id="menu-nav" ng-show="main.isLoggedIn()">
     <ul>
-    <li> <a ui-sref-active="active" ui-sref="front">Front page</a></li>
+    <li > <a ui-sref-active="active" ui-sref="front">Front page</a></li>
     <li> <a ui-sref-active="active" ui-sref="login">Login</a></li>
     <li> <a ui-sref-active="active" ui-sref="register">Register</a></li>
     <li> <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a></li>
@@ -83,11 +85,25 @@
 
 
 
+<section ng-show="!main.isLoggedIn()">
+<h1>Login</h1>
+
+<div class="centered">
+    <div ng-hide="main.isLoggedIn()">
+      <h1>Satellizer</h1>
+      <h3>Oauth for Facebook &amp; Github</h3>
+      <hr>
+      <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
+      <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
+ 
+      <button class="github" ng-click="main.authenticate('instagram')"><i class="fa fa-github-square"></i> Sign in with Insgram</button>
+
+</section>
 
 
 <div class="content">
   
- <main ui-view>
+ <main ui-view ng-show="main.isLoggedIn()">
 
 
  </main> 

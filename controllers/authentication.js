@@ -3,10 +3,6 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var config = require('../config/app');
 var oauth = require('../config/oauth');
-var secret = require('../config/tokens').secret;
-var moment = require('moment');
-//var jwt = require('jwt-simple');
-
 
 
 function register(req, res) {
@@ -38,130 +34,6 @@ function login(req, res) {
     return res.status(200).json({ message: "Login successful", user: user, token: token });
   });
 }
-
-
-function facebook(req, res) {
-
-  var params = {
-    code: req.body.code,
-    client_id: req.body.clientId,
-    client_secret: process.env.FACEBOOK_API_SECRET,
-    redirect_uri: "http://localhost:8000/"
-  };
-
-  console.log(params);
-
-  // step 1, we make a request to facebook for an access token
-  request
-    .get({
-      url: oauth.facebook.accessTokenUrl,
-      qs: params,
-      json: true
-    })
-    .then(function(accessToken) {
-      // step 2, we use the access token to get the user's profile data from facebook's api
-      return request.get({
-        url: oauth.facebook.profileUrl,
-        qs: accessToken,
-        json: true
-      });
-    })
-    .then(function(profile) {
-      console.log(profile);
-      // step 3, we try to find a user in our database by their email
-      return User.findOne({ email: profile.email })
-        .then(function(user) {
-          console.log("user found", user)
-          // if we find the user, we set their facebookId and picture to their profile data
-          if(user) {
-            user.facebookId = profile.id;
-            user.picture = user.picture || profile.picture.data.url;
-          }
-          else {
-            // otherwise, we create a new user record with the user's profile data from facebook
-            user = new User({
-              facebookId: profile.id,
-              name: profile.name,
-              picture: profile.picture.data.url,
-              email: profile.email
-            });
-          }
-          console.log("user", user)
-          // either way, we save the user record
-          return user.save();
-        })
-        .catch(function(err) { 
-          console.log(err);
-          return res.status(500).json({ message: err })
-        });
-    })
-    .then(function(user) {
-      // step 4, we create a JWT and send it back to our angular app
-      var payload = { _id: user._id, name: user.name, picture: user.picture };
-      var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
-      return res.send({ token: token, user: payload });
-    })
-    .catch(function(err) {
-      console.log(err);
-      // we handle any errors here
-      return res.status(500).json({ error: err });
-    });
-}
-
-// Handles post request FROM github to our server
-function github(req,res) {
-  var params = {
-    client_id: process.env.GITHUB_API_KEY,
-    client_secret: process.env.GITHUB_API_SECRET,
-    code: req.body.code
-  };
-  // Make a request for an access token
-  request.post({
-    url: oauth.instagram.accessTokenUrl,
-    qs: params,
-    json: false
-  })
-  .then(function(response){
-    console.log(response)
-    // Request returns access token
-    // Make a request or the user's data (profile info)
-    return request.get({
-      url: oauth.github.profileUrl + "?access_token=" + response.access_token,
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise' }
-    });
-  })
-  .then(function(profile){
-    console.log("profile", profile)
-    // Github has returned a profile
-    // We find or create a user on OUR api with the profile info
-    return User.findOne({ email: profile.email })
-      .then(function(user) {
-        if(user) {
-          user.githubId = profile.id;
-          user.picture = user.picture || profile.avatar_url
-        } else {
-          user = new User({
-            githubId: profile.id,
-            name: profile.name,
-            picture: profile.avatar_url,
-            email: profile.email
-          });
-        }
-        return user.save();
-      })
-  })
-  .then(function(user){
-    // Finally, send a token to the front end
-    var payload = { _id: user._id, name: user.name, picture: user.picture }
-    var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
-    return res.send({ token: token, user: payload });
-  })
-  .catch(function(err){
-    return res.status(500).json(err);
-  });
-}
-
 
 /*
  |--------------------------------------------------------------------------
@@ -260,38 +132,88 @@ function github(req,res) {
   });
 };
 
-/*// Handles post request FROM INSTAGRAM to our server
-function instagram(req,res) {
-  console.log("Instagram says: req.body.code " + req.body.code)
-
-  // var params = {
-  //   client_id: process.env.INSTAGRAM_API_KEY,
-  //   client_secret: process.env.INSTAGRAM_API_SECRET,
-  //   grant_type: "authorization_code",
-  //   code: req.body.code
-  // };
-
-  var params = { // advice from HERE -> https://github.com/sahat/instagram-hackhands/blob/master/server/server.js
-    client_id: process.env.INSTAGRAM_API_KEY,
-    redirect_uri: req.body.redirectUri,
-    client_secret: process.env.INSTAGRAM_API_SECRET,
+function facebook(req, res) {
+  console.log("Reached facebook function")
+  var params = {
     code: req.body.code,
-    grant_type: 'authorization_code'
+    client_id: req.body.clientId,
+    client_secret: process.env.FACEBOOK_API_SECRET,
+    redirect_uri: config.appUrl + "/"
   };
-  console.log("Instagram APIs keys are" + process.env.INSTAGRAM_API_KEY + "&" +  process.env.INSTAGRAM_API_SECRET);
-  // Make a request for an access token
+  console.log(params);
 
+  // step 1, we make a request to facebook for an access token
+  request
+    .get({
+      url: oauth.facebook.accessTokenUrl,
+      qs: params,
+      json: true
+    })
+    .then(function(accessToken) {
+      console.log("this is the accesstoken: " + accessToken);
+      // step 2, we use the access token to get the user's profile data from facebook's api
+      return request.get({
+        url: oauth.facebook.profileUrl,
+        qs: accessToken,
+        json: true
+      });
+    })
+    .then(function(profile) {
+      console.log(profile);
+      // step 3, we try to find a user in our database by their email
+      return User.findOne({ email: profile.email })
+        .then(function(user) {
+          console.log("found the user!" )
+          // if we find the user, we set their facebookId and picture to their profile data
+          if(user) {
+            console.log("user already exists-still continuing")
+            user.facebookId = profile.id;
+            user.picture = user.picture || profile.picture.data.url;
+          }
+          else {
+            // otherwise, we create a new user record with the user's profile data from facebook
+            user = new User({
+              facebookId: profile.id,
+              name: profile.name,
+              picture: profile.picture.data.url,
+              email: profile.email
+            });
+          }
+          // either way, we save the user record
+          return user.save();
+        });
+    })
+    .then(function(user) {
+      // step 4, we create a JWT and send it back to our angular app
+      var payload = { _id: user._id, name: user.name, picture: user.picture };
+      var token = jwt.sign(payload, config.secret, { expiresIn: '24h' });
+      return res.send({ token: token, user: payload });
+    })
+    .catch(function(err) {
+      // we handle any errors here
+      return res.status(500).json({ error: err });
+    });
+}
+
+// Handles post request FROM github to our server
+function github(req,res) {
+  var params = {
+    client_id: process.env.GITHUB_API_KEY,
+    client_secret: process.env.GITHUB_API_SECRET,
+    code: req.body.code
+  };
+  // Make a request for an access token
   request.post({
-    url: oauth.instagram.accessTokenUrl,
-    qs: params
+    url: oauth.github.accessTokenUrl,
+    qs: params,
+    json: true
   })
   .then(function(response){
-    console.log("successfully made a post request to instagram")
     console.log(response)
     // Request returns access token
     // Make a request or the user's data (profile info)
     return request.get({
-      url: oauth.instagram.profileUrl + "?access_token=" + response.access_token,
+      url: oauth.github.profileUrl + "?access_token=" + response.access_token,
       json: true,
       headers: { 'User-Agent': 'Request-Promise' }
     });
@@ -303,11 +225,11 @@ function instagram(req,res) {
     return User.findOne({ email: profile.email })
       .then(function(user) {
         if(user) {
-          user.instagramId = profile.id;
+          user.githubId = profile.id;
           user.picture = user.picture || profile.avatar_url
         } else {
           user = new User({
-            instagramId: profile.id,
+            githubId: profile.id,
             name: profile.name,
             picture: profile.avatar_url,
             email: profile.email
@@ -325,7 +247,7 @@ function instagram(req,res) {
   .catch(function(err){
     return res.status(500).json(err);
   });
-}*/
+}
 
 module.exports = {
   facebook: facebook,
