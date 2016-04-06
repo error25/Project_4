@@ -16,11 +16,14 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="/vendor/lodash/dist/lodash.js"></script>
   <script src="/vendor/angular-rangeslider/angular.rangeSlider.js"></script>
+
+
+
   <!-- External CSS Frameworks -->
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>  
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/vendor/angular-rangeslider/angular.rangeSlider.css">
-
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <!-- Google Charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -30,6 +33,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/2.11.0/rzslider.min.css">
 
   <!-- Internal Modules -->
+  <script src="/js/sampleinstasberlin.js"></script>
   <script src="/js/cities.js"></script>
   <script src="/js/nomadcities.js"></script>
   <script src="/js/app.js"></script>
@@ -54,7 +58,6 @@
   <div id="menu-nav" ng-show="main.isLoggedIn()">
     <ul>
     <li > <a ui-sref-active="active" ui-sref="front">Front page</a></li>
-    <li> <a ui-sref-active="active" ui-sref="login">Login</a></li>
     <li> <a ui-sref-active="active" ui-sref="register">Register</a></li>
     <li> <a ui-sref-active="active" ui-sref="gifmaker">Gif Maker</a></li>
     <li> <a ui-sref-active="active" ui-sref="instacity">InstaCity</a></li>
@@ -65,6 +68,11 @@
 </div>
 
 
+<div class="row tint" ng-init="main.frontInstaBlocks()" ng-show="!main.isLoggedIn()">
+  <div class="tint" ng-repeat="src in main.frontInstas">
+  <img ng-src="{{src}}">
+  </div>
+</div>
 
 <!-- AVATAR in NAV -->
 <section class="topNavLoginBar">
@@ -76,32 +84,35 @@
   </div>
 </section>
 
-
 <script>
   $(document).on('click', '#menu-tab', function () {
     $('#menu-nav').slideToggle('slow');
   });
 </script>
 
-
-
-<section ng-show="!main.isLoggedIn()">
-<h1>Login</h1>
-
-<div class="centered">
-    <div ng-hide="main.isLoggedIn()">
-      <h1>Satellizer</h1>
-      <h3>Oauth for Facebook &amp; Github</h3>
-      <hr>
-      <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
-      <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
- 
-      <button class="github" ng-click="main.authenticate('instagram')"><i class="fa fa-github-square"></i> Sign in with Insgram</button>
-
-</section>
-
-
 <div class="content">
+
+
+
+
+  <section class="centered" ng-show="!main.isLoggedIn()">
+    <div ng-hide="main.isLoggedIn()">
+        
+        <span class="loginHeader">outEaze</span>
+        <span class="loginTagline"> Dear Comrade, Its time for you to follow out your mission to move with political & economic changes, back to the motherland.  
+       <!--  <span><img ng-src="{{ main.frontInstas }}"></span> -->
+        
+         </span>        
+        <hr>
+        <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
+        <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
+        <button class="instagram" ng-click="main.authenticate('instagram')"><i class="fa fa-instagram"></i> Sign in with Insgram</button>
+    </div>
+  </section>
+
+
+
+</div>
   
  <main ui-view ng-show="main.isLoggedIn()">
 

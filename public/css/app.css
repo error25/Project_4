@@ -13,12 +13,90 @@ h1 {
  
 }
 
+.facebook{
+  display: inline-block;
+  width: 75%;
+}
+
+.github{
+  display: inline-block;
+  width: 75%;
+}
+
+.instagram{
+  display: inline-block;
+  width: 75%;
+}
+
+.tint {
+ background-color: red;
+  top: 0px ;
+  left: 0px ;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+
+.tint img{
+position: relative;
+  width: 12.5%;
+  height: 12.5%;
+ display: inline;
+
+}
+
+
+
+.loginHeader {
+  position: relative;
+  top: 32px;
+  font-size: 46px;
+  color: black;
+  font-family: MolotFont, Helvetica, sans-serif;
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+}
+
+.loginTagline{
+  display: inline-block;
+  position: relative;
+  margin-top: 30px;
+  font-family: 'AsimovFont', Helvetica;
+  font-size: 17px;
+  color: black;
+  text-align: center;
+}
+
+.centered {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 350px;
+  height: 400px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75); 
+  font-family: 'AsimovFont', 'MolotFont';
+  color: black;
+  text-align: center;
+  z-index: 10;
+}
+
+
+
+
 main {
   margin: auto 0;
   text-align: center;
 }
 
-footer {
+/*footer {
   background-color: red;
   position: absolute;
   height: 150px;
@@ -26,7 +104,7 @@ footer {
   margin-bottom: 0px;
   margin-left: 0px;
   z-index: 10;
-}
+}*/
 
 a {
   color: #D7DADB;
@@ -45,8 +123,10 @@ a {
 }
 
 .content {
+  position: fixed;
   margin-top: 220px;
   padding: 0 10px;
+  background: (rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45));
 }
 
 

@@ -45,14 +45,6 @@ function Router($stateProvider, $urlRouterProvider){
       url: '/gifmaker',
       templateUrl: 'gifmaker.html'
     })
-    .state('login',{
-      url: '/login',
-      templateUrl: 'login.html'
-    })
-    .state('register',{
-      url: '/login',
-      templateUrl: 'login.html'
-    })
     .state('instacity',{
       url: '/instacity',
       templateUrl: 'instacity.html'

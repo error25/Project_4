@@ -74,25 +74,23 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
         }
       }
     };
-
-
   self.requirements.rentMax = 1000;
   self.requirements.rentMin = 500;
- // http://content.guardianapis.com/search?q=millennials%2C%20cities&api-key=
+  self.frontInstas = [];
 
+self.frontInstaBlocks = function(){
+  console.log("frontInstaBlocks function called")
+ self.frontInstas = sampleInstasBerlin.slice(0,32);
+ console.log(self.frontInstas);
+}
 
 
 
 /// if CITY page present, then load city
 self.loadPage = function(){
-
 var placePage = ($state.href($state.current.name, $state.params, {absolute: false})).split("/")[1];
-
-/////////////////////////// GET CITY from URL Params
   city = ($state.href($state.current.name, $state.params, {absolute: false})).split("/")[2];
-
   if (placePage == "place"){ // definitely a place page URL?
-   
    // callfunctions for this URL
     this.getNomad(city)
     self.country = self.nomadResult.info.country.name;
