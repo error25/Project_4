@@ -1,103 +1,62 @@
-
+<section class="front">
 
 <h4>“Instead of trying to make a better robot, try to make a better man.”
 Shimon Peres</h4>
 
 
-<div class="col-md-4">
-<h4>Beer in Bar</h4>
-<rzslider
-    rz-slider-model="main.requirements.beer"
-    rz-slider-options="{floor: 0, ceil: 15}"></rzslider>
- </div>
+
+<div class="sliderRanges">
+    <div class="col-md-4">
+    <h4>Beer in Bar</h4>
+    <rzslider
+        rz-slider-model="main.requirements.beer"
+        rz-slider-options="{floor: 0, ceil: 15}"></rzslider>
+     </div>
 
 
- <div class="col-md-4">
- <h4>Rent Range</h4>
- <rzslider
-     rz-slider-model="main.requirements.rentMin"
-     rz-slider-high="main.requirements.rentMax"
-     rz-slider-options="{floor: 100, ceil: 4000}"></rzslider>
-  </div>
+     <div class="col-md-4">
+     <h4>Rent Range</h4>
+     <rzslider
+         rz-slider-model="main.requirements.rentMin"
+         rz-slider-high="main.requirements.rentMax"
+         rz-slider-options="{floor: 100, ceil: 4000}"></rzslider>
+      </div>
 
 
- <div class="col-md-4">
- <h4>Coffee In Cafe</h4>
- <rzslider
-     rz-slider-model="main.requirements.coffee"
-     rz-slider-options="{floor: 0, ceil: 15}"></rzslider>
-  </div>
+     <div class="col-md-4">
+     <h4>Coffee In Cafe</h4>
+     <rzslider
+         rz-slider-model="main.requirements.coffee"
+         rz-slider-options="{floor: 0, ceil: 15}"></rzslider>
+      </div>
 
 
- <div class="col-md-4">
- <h4>How Friendly to Strangers?</h4>
- <rzslider
-     rz-slider-model="main.requirements.foreignerFriendyIdx.value"
-     rz-slider-options="main.requirements.foreignerFriendyIdx.options"></rzslider>
- </div>
+     <div class="col-md-4">
+     <h4>How Friendly to Strangers?</h4>
+     <rzslider
+         rz-slider-model="main.requirements.foreignerFriendyIdx.value"
+         rz-slider-options="main.requirements.foreignerFriendyIdx.options"></rzslider>
+     </div>
 
 
- <div class="col-md-4">
- <h4>Important that they are non racist?</h4>
- <rzslider
-     rz-slider-model="main.requirements.racismIdx.value"
-     rz-slider-options="main.requirements.racismIdx.options"></rzslider>
- </div>
+     <div class="col-md-4">
+     <h4>Important that they are non racist?</h4>
+     <rzslider
+         rz-slider-model="main.requirements.racismIdx.value"
+         rz-slider-options="main.requirements.racismIdx.options"></rzslider>
+     </div>
 
 
- <div class="col-md-4">
- <h4>Important that they accept LGBT</h4>
- <rzslider
-     rz-slider-model="main.requirements.lgbtIdx.value"
-     rz-slider-options="main.requirements.lgbtIdx.options"></rzslider>
- </div>
+     <div class="col-md-4">
+     <h4>Important that they accept LGBT</h4>
+     <rzslider
+         rz-slider-model="main.requirements.lgbtIdx.value"
+         rz-slider-options="main.requirements.lgbtIdx.options"></rzslider>
+     </div>
 
-
-
-<hr>
-
-<button class="btn btn-primary" ng-click="main.meetmyRequirements()">Meet my Requirments</button>
+<button class="btn btn-secondary btn-lg" ng-click="main.meetmyRequirements()">Meet my Requirments</button>
 <p></p>
-
-<h1>Places that meet your requirements</h1>
-<ul>
-<li ng-repeat="n in main.meetsRequirements.response track by $index">
-<div ng-click="main.gotoCity2(n)"><span>{{n}} </span>
-</li>
-</ul>
+</div> <!-- end of slider range choices -->
 
 
-
-
-<h1>Inequality-adjusted HDI</h1>
-
-<p>https://en.wikipedia.org/wiki/List_of_countries_by_inequality-adjusted_HDI</p>
-
-
-https://en.wikipedia.org/wiki/World_Happiness_Report
-
-State_of_World_Liberty_Index#2015_rankings
-
-<form name="myForm">
-  <label for="singleSelect" class="selectpicker"> Single select: </label><br>
-  <select name="singleSelect" ng-model="main.selectedWikiTable">
-    <option value="World_Happiness_Report">World_Happiness_Report</option>
-    <option value="List_of_countries_by_inequality-adjusted_HDI">Cities by inequality-adjusted_HDI</option>
-    <option value="List_of_countries_by_GDP_(nominal)_per_capita">GDP per person</option>
-    <option value="State_of_World_Liberty_Index#2015_rankings">State_of_World_Liberty_Index#2005_rankings</option>
-  </select><br>
-</form ng-blur="main.getWikiTable(main.selectedWikiTable)">
-
-
-
-<button ng-click="main.getWikiTable(main.selectedWikiTable);">Get Wiki</button>
-
-<div id="chart_div"></div>
-
-<ul>
-<li ng-repeat="n in main.wikitable track by $index">
-<div ng-click="main.gotoCity(n.Country)">{{$index}} )<span>{{n.Country}}</span>
-</div>
-</ul>
-
-
+</section>

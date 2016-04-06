@@ -77,11 +77,109 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.requirements.rentMax = 1000;
   self.requirements.rentMin = 500;
   self.frontInstas = [];
+  self.sortedBy = {};
+
+
+/// Tell it what you want it to sort by and it sorts it
+self.sortOrder= function(objectpropertytofind){
+
+console.log("sortOrder function called with : " + objectpropertytofind);
+
+
+var results = self.resultspage;
+
+
+  self.sortedBy.airbnb = results.sort(function(a, b) {
+    return parseFloat(a.cost.airbnb_median.USD) - parseFloat(b.cost.airbnb_median.USD);
+  });
+  
+  self.sortedBy.beerincafe = results.sort(function(a, b) {
+    return parseFloat(a.cost.beer_in_cafe.USD) - parseFloat(b.cost.beer_in_cafe.USD);
+  });
+
+  self.sortedBy.coffeeincafe = results.sort(function(a, b) {
+    return parseFloat(a.cost.coffee_in_cafe.USD) - parseFloat(b.cost.coffee_in_cafe.USD);
+    });
+
+  self.sortedBy.coworkingspace = results.sort(function(a, b) {
+  return parseFloat(a.cost.coworking.monthly.USD) - parseFloat(b.cost.coworking.monthly.USD);
+});
+
+  self.sortedBy.expat = results.sort(function(a, b) {
+ return parseFloat(a.cost.expat.USD) - parseFloat(b.cost.expat.USD);
+});
+
+  self.sortedBy.hotel = results.sort(function(a, b) {
+ return parseFloat(a.cost.hotel.USD) - parseFloat(b.cost.hotel.USD);
+});
+
+ self.sortedBy.local = results.sort(function(a, b) {
+ return parseFloat(a.cost.local.USD) - parseFloat(b.cost.local.USD);
+});
+
+ self.sortedBy.longterm = results.sort(function(a, b) {
+ return parseFloat(a.cost.longTerm.USD) - parseFloat(b.cost.longTerm.USD);
+});
+
+ self.sortedBy.lgbt = results.sort(function(a, b) {
+ return parseFloat(a.scores.lgbt_friendly) - parseFloat(b.scores.lgbt_friendly);
+});
+
+
+ if (objectpropertytofind == "lgbt"){ // air bnb median
+  self.resultspage = self.sortedBy.lgbt;
+  console.log(self.sortedBy.lgbt)
+ }
+
+   if (objectpropertytofind == "airbnbmedia"){ // air bnb median
+    self.resultspage = self.sortedBy.airbnb;
+    console.log(self.sortedBy.airbnb)
+   }
+
+   if (objectpropertytofind == "beerincafe"){ // beer in cafe
+    self.resultspage = self.sortedBy.beerincafe;
+    console.log(self.sortedBy.beerincafe)
+   };
+     
+   if (objectpropertytofind == "coffeeincafe"){ // coffee in cafe
+    console.log("return sortBy Cofee_in_cafe")
+    self.resultspage = self.sortedBy.coffeeincafe;
+    console.log(self.sortedBy.coffeeincafe);
+   };
+   if (objectpropertytofind == "coworkingmonthly"){ // co working monthly rent
+    self.resultspage = self.sortedBy.coworkingspace;
+   };
+   if (objectpropertytofind == "expat"){ // expat monthly spend 
+    self.resultspage = self.sortedBy.expat;
+   };
+   if (objectpropertytofind == "hotel"){ // hotel per night
+    self.resultspage = self.sortedBy.hotel;
+   };
+   if (objectpropertytofind == "local"){ // flat per month
+    self.resultspage = self.sortedBy.local;
+   };
+   if (objectpropertytofind == "longterm"){  // long term monthly outgoings
+    self.resultspage = self.sortedBy.longterm;
+   };
+   if (objectpropertytofind == "nonalcho"){ // can of cola in bar
+    self.resultspage = self.sortedBy.cocacola;
+   };
+
+}
 
 self.frontInstaBlocks = function(){
   console.log("frontInstaBlocks function called")
- self.frontInstas = sampleInstasBerlin.slice(0,32);
+ var randomnumber = Math.floor(Math.random()*(sampleInstasBerlin.length - 33))
+ var endofArray = randomnumber + 32;
+ self.frontInstas = sampleInstasBerlin.slice(randomnumber,endofArray);
  console.log(self.frontInstas);
+}
+
+// if on RESULTS page, fetch last results
+self.getLastResults = function(){
+   if (self.resultspage == undefined){
+    $state.transitionTo('front')
+   }
 }
 
 
@@ -193,9 +291,31 @@ self.meetmyRequirements = function(){
   racismIdx = self.meetsRequirements.racismIdx
   lgbtIdx = self.meetsRequirements.lgbtIdx
 
+
+
+/////// THE LIST OF CITIES THAT MEETS REQUIREMENTS
   self.meetsRequirements.response = _.intersection(rent, coffee, beer, foreignerfriendly, racismIdx, lgbtIdx);
-  console.log(self.meetsRequirements.response);
- 
+///////////////////////
+  var newArr = [];
+  var i = 0;
+  while (i < self.meetsRequirements.response.length){
+    var r = 0;
+    while (r < nomad.result.length){
+        if (nomad.result[r].info.city.name == self.meetsRequirements.response[i]){
+         newArr.push(nomad.result[r]);
+        }
+      r++
+    }
+   i++
+  }
+  
+  self.resultspage = newArr;
+  console.log(self.resultspage); // display these on results page
+ $state.transitionTo('results'); //transition to results page
+ // result values
+ self.requirements.foreignerFriendyIdx.value = 10;
+ self.requirements.lgbtIdx.value = 10;
+ self.requirements.racismIdx.value = 10;
 }
 
 var Guardian = $resource('http://content.guardianapis.com/search?q=millennials%2C%20cities&api-key=' + GUARDIAN_API_KEY, {}, {
@@ -268,6 +388,8 @@ this.gotoCity2 = function(city){  //lodash
 
   $state.transitionTo('city', {city: city, country: country});
 }
+
+
 
 
 this.gotoCity = function(country){  //lodash

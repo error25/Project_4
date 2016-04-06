@@ -52,6 +52,10 @@ function Router($stateProvider, $urlRouterProvider){
     .state('city', {
       url: '/place/:city/:country',
       templateUrl: 'city.html'
+    })
+    .state('results', {
+      url: '/results/',
+      templateUrl: 'results.html'
     });
     
 

@@ -63,26 +63,30 @@
     <li> <a ui-sref-active="active" ui-sref="instacity">InstaCity</a></li>
     </ul>
   </div>
-  
-  <div id="menu-tab" class="closed">MENU</div>
-</div>
+    <div id="menu-tab" class="closed">MENU</div>
+  </div>
 
+  <!-- AVATAR in NAV -->
+  <section class="topNavLoginBar">
+        <img ng-src="{{ main.currentUser.picture }}" class="avatar">
+        <div ng-show="main.isLoggedIn()">
+        <strong>{{ main.currentUser.name }}</strong>
+        <a ng-click="main.logout()"><i class="fa fa-sign-out"></i>(Logout)</a>
+    </div>
+  </section>
 
-<div class="row tint" ng-init="main.frontInstaBlocks()" ng-show="!main.isLoggedIn()">
-  <div class="tint" ng-repeat="src in main.frontInstas">
-  <img ng-src="{{src}}">
+<hr>
+<div class="container">
+  <div  ng-init="main.frontInstaBlocks()" ng-show="!main.isLoggedIn()">
+    <div class="col-md-3" ng-repeat="src in main.frontInstas">
+    <img ng-src="{{src}}">
+    </div>
   </div>
 </div>
+<div class="tintTHIS" ng-hide="main.isLoggedIn()">
 
-<!-- AVATAR in NAV -->
-<section class="topNavLoginBar">
-      <img ng-src="{{ main.currentUser.picture }}" class="avatar">
-      <div ng-show="main.isLoggedIn()">
-      <strong>{{ main.currentUser.name }}</strong>
-      <a ng-click="main.logout()"><i class="fa fa-sign-out"></i>(Logout)</a>
-      <hr>
-  </div>
-</section>
+
+
 
 <script>
   $(document).on('click', '#menu-tab', function () {
@@ -90,7 +94,7 @@
   });
 </script>
 
-<div class="content">
+
 
 
 
@@ -107,10 +111,17 @@
         <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
         <button class="github" ng-click="main.authenticate('github')"><i class="fa fa-github-square"></i> Sign in with Github</button>
         <button class="instagram" ng-click="main.authenticate('instagram')"><i class="fa fa-instagram"></i> Sign in with Insgram</button>
+
     </div>
+    <section class="currentCity"> 
+     <span>BERLIN </span>
+    </section>
   </section>
 
+  
 
+
+  </div> <!--  END OF TINT THIS -->
 
 </div>
   
