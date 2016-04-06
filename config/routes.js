@@ -27,5 +27,6 @@ http://localhost:8000/api/wikicity/:city
 router.get('/api/wikicity/:city', apiController.wikicity);
 
 
+router.get('/api/instaTest/', apiController.instaTest);
 
 module.exports = router;

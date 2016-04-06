@@ -87,21 +87,13 @@ function instagramR(req,res){
         console.log("opened site? ", status);
         page.includeJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function (err) {
           // jQuery Loaded. 
-          // Wait for a bit for AJAX content to load on the page. Here, we are waiting 5 seconds. 
+
           setTimeout(function () {
             return page.evaluate(function () {
-              //Get what you want from the page using jQuery. A good way is to populate an object with all the jQuery commands that you need and then return the object. 
+
               var ImagesArr = [],
                   pArr = [];
 
-/*              $('html, body').animate({scrollTop:10000},'10', function() {
-                console.log( "scroll down by 10,000 pixels apparently succeeded" );
-
-                $('img').each(function () { 
-                  h2Arr.push($(this).attr('src')); 
-                });
-
-              });;*/
    
               $('.photo-grid').each(function () { 
                ImagesArr.push($(this).attr('src')); 
@@ -122,6 +114,48 @@ function instagramR(req,res){
       });
     });
   });
+}
+
+loadedPage = [];
+
+function instaTest(req,res){
+
+  driver.create({ path: require('phantomjs').path }, function (err, browser) {
+    return browser.createPage(function (err, page) {
+      loadedPage = page;
+      
+      return page.open("http://ramblr.us/?q=Barcelona,%20Spain", function (err,status) {
+     console.log("opened site? ", status);
+        page.includeJs('http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', function (err) {
+              setTimeout(function () {
+                return page.evaluate(function () {
+
+                  var imgArr = [],
+                      pArr = [];
+                  $('img').each(function () { imgArr.push($(this).attr('src')); });
+                  $('p').each(function () { pArr.push($(this).html()); });
+                  $(window).scrollTop(4000);
+                  return {
+                    img: h2Arr
+                  };
+                }, function (err,result) {
+                  console.log(result);
+                });
+              }, 900);
+      });
+   setTimeout(function(){ 
+
+
+
+
+    page.render('capture3.png') 
+
+  },2000) 
+       
+    });
+  });
+    browser.exit(); 
+});
 }
 
 
@@ -165,5 +199,6 @@ function numCity(req, res){
      numCity: numCity,
      wikitable: wikitable,
      numtable: numtable,
-     wikicity: wikicity
+     wikicity: wikicity,
+     instaTest: instaTest
    };

@@ -1,13 +1,53 @@
 
+<h1>{{main.selected.city }} , {{main.selected.country}} </h1>
+
+<div id="instaGIF"></div>
 
 
-{{main.helloworld}}
+
+
+
+
+<ul>
+<h3>Cost</h3>
+<li ng-repeat="(key, value) in main.nomadResult.cost track by $index">
+<span>{{key}}</span><span>{{value}}</span>
+</li>
+</ul>
+
+<ul>
+<h3>Info</h3>
+<li ng-repeat="(key, value) in main.nomadResult.info track by $index">
+<span>{{key}}</span><span>{{value}}</span>
+</li>
+</ul>
+
+<ul>
+<h3>Media</h3>
+<li ng-repeat="(key, value) in main.nomadResult.media track by $index">
+<span>{{key}}</span><span>{{value}}</span>
+</li>
+</ul>
+
+<ul>
+<h3>People</h3>
+<li ng-repeat="(key, value) in main.nomadResult.people track by $index">
+<span>{{key}}</span><span>{{value}}</span>
+</li>
+</ul>
+
+<ul>
+<h3>scores</h3>
+<li ng-repeat="(key, value) in main.nomadResult.scores track by $index">
+<span>{{key}}</span><span>{{value}}</span>
+</li>
+</ul>
 
 <h1>{{main.selected.city }} , {{main.selected.country}} </h1>
 
 
 <ul>
-<h3>{{main.selected.city }} WikiData</h3>
+<h3>WikiData</h3>
 
 <span>Population_Metro: {{main.wikicity.wikisummary.population_metro}}</span>
 </ul>
@@ -24,7 +64,17 @@
 <ul>
 <h3>{{main.selected.city }} Details</h3>
 <li ng-repeat="detail in main.detailed track by $index">
-<span>{{detail['Salaries And Financing']}}</span> :{{main.country.currencies[0]}} <span>
-{{ detail[2]}}</span>
+<span>{{detail['Salaries And Financing']}}</span> :{{main.country.currencies[0]}}
+{{ detail[2] }}</span>
 </li>
 </ul>
+
+<button ng-click="main.convertCurrencytoUSD()">Convert Local Curreny into dollars </button>
+
+
+
+<container class="container">
+<div class="col-md-2 instaPhoto" ng-repeat="src in main.instagrams track by $index">
+  <img ng-src="{{src}}"/>
+</div>
+</container>

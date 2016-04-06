@@ -1,5 +1,5 @@
 angular
-  .module("VinceLynch", ['ngResource', 'satellizer', 'angular-jwt', 'ui.router'])
+  .module("VinceLynch", ['ngResource', 'satellizer', 'angular-jwt', 'ui.router', 'rzModule'])
   .config(oauthConfig)
   //.config(NGRouteR); 
   .config(Router);  
