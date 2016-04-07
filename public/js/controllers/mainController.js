@@ -12,13 +12,12 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.helloworld = "hello Angular";
   self.instagrams = [];
   self.searchPlace = {};
-  self.wikitable = {};
+
   self.selected = {};
   self.summary = {};
   self.detailed = {};
-  self.wikicity = {};
+
   self.country = {};
-  self.guardianarticles = [];
   self.nomadResult = {};
   self.meetsRequirements = {};
   self.meetsRequirements.beer = [];
@@ -80,11 +79,12 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.sortedBy = {};
 
 
+
+
 /// Tell it what you want it to sort by and it sorts it
 self.sortOrder= function(objectpropertytofind){
 
 console.log("sortOrder function called with : " + objectpropertytofind);
-
 
 var results = self.resultspage;
 
@@ -195,7 +195,6 @@ var placePage = ($state.href($state.current.name, $state.params, {absolute: fals
     var country = self.country;
     self.selected = {city: city, country: country};
     self.getCityNumTableData(city,country)
-    self.getWikicityData(city)
     self.getGeoCode();
   }
 }
@@ -318,19 +317,6 @@ self.meetmyRequirements = function(){
  self.requirements.racismIdx.value = 10;
 }
 
-var Guardian = $resource('http://content.guardianapis.com/search?q=millennials%2C%20cities&api-key=' + GUARDIAN_API_KEY, {}, {
-});
-
-this.getGuardianArticles= function(){
-  Guardian.get(function(data){
-    console.log('success, got Guardian Articles: ', data);  
-   self.guardianarticles = data.response.results;
-   console.log(self.guardianarticles);
-    }, function(err){
-    console.log('Guardian Articles API - request failed');
-    });
-}
-this.getGuardianArticles();
 
 
 var Geocoder = $resource('https://maps.googleapis.com/maps/api/geocode/json?address=' + self.selected.city + "+" + self.selected.country +  '&key=' + GEOCODER_API_KEY, {}, {
@@ -347,18 +333,7 @@ this.getGeoCode = function(){
 }
 
 
-var Wikicity = $resource('http://localhost:8000/api/wikicity/:city', {}, {
-  get: { cache: true, method: 'get' }
-});
 
-this.getWikicityData = function(city){
-    Wikicity.get({city: city},function(data){
-      console.log('success, got Wikicity: ', data);  
-      self.wikicity = data;
-      }, function(err){
-      console.log('Wikicity Internal API - request failed');
-      });
-  }
 
 this.getLatLngRESTcountries = function(city){
   $http.get('https://restcountries.eu/rest/v1/capital/' + city).success(function(data){
@@ -391,24 +366,6 @@ this.gotoCity2 = function(city){  //lodash
 
 
 
-
-this.gotoCity = function(country){  //lodash
-  self.country = $window._.find(Cities, { name: country });
-
-  var city = self.country.capital;
-  self.getNomad(city)
-
-  console.log(self.country)
-  console.log("city is: " + city);
-
-  self.selected = {city: city, country: country};
-  self.getCityNumTableData(city,country)
-  self.getWikicityData(city)
-  self.getGeoCode();
-
-  $state.transitionTo('city', {city: city, country: country});
-}
-
 this.getNomad = function(city){
   console.log("get nomad function called");
   city = city.charAt(0).toUpperCase() + city.substr(1).toLowerCase();
@@ -423,57 +380,6 @@ this.getNomad = function(city){
  self.nomadResult = nomad.result[i]
  console.log(self.nomadResult)
 }
-
-  var Wikitable = $resource('http://localhost:8000/api/wikitable/:wikipage', {}, {
-    get: { cache: true, method: 'get' }
-  });
-
-
-
-  
-
-this.getWikiTable = function(wikititle){
-  Wikitable.get({wikipage: wikititle},function(data){
-    data.rows.shift();
-    console.log('success, got wikitable: ', data.rows);  
-    self.wikitable = data.rows; 
-/*
-        google.charts.load('current', { 'packages': ['map'] });
-        google.charts.setOnLoadCallback(drawMap);
-
-        function drawMap() {
-          var data = google.visualization.arrayToDataTable([
-            ['Country', 'Index'],
-            ['China', 'China: 1,363,800,000'],
-            ['India', 'India: 1,242,620,000'],
-            ['US', 'US: 317,842,000'],
-            ['Indonesia', 'Indonesia: 247,424,598'],
-            ['Brazil', 'Brazil: 201,032,714'],
-            ['Pakistan', 'Pakistan: 186,134,000'],
-            ['Nigeria', 'Nigeria: 173,615,000'],
-            ['Bangladesh', 'Bangladesh: 152,518,015'],
-            ['Russia', 'Russia: 146,019,512'],
-            ['Japan', 'Japan: 127,120,000']
-          ]);
-   
-
-        var options = { showTip: true };
-
-        var map = new google.visualization.Map(document.getElementById('chart_div'));
-
-        map.draw(data, options);
-      };
-      */
-
-
-    var lat = data.rows.wikisummary  
-    // self.InstaLocationGet(lat, lng) 
-    }, function(err){
-    console.log('WikiTable Internal API - request failed');
-    });
-  }
-  
-  
 
 
   var Instagram = $resource('http://localhost:8000/api/instagram/:lat/:lng', {}, {
@@ -496,8 +402,10 @@ this.getWikiTable = function(wikititle){
         var image = obj.image,
         animatedImage = document.createElement('img');
         animatedImage.src = image;
-        document.getElementById("instaGIF").appendChild(animatedImage);
-        //document.body.appendChild(animatedImage);
+
+        var instaGifElement = document.getElementById("instaGIF")
+        instaGifElement.innerHTML = '';
+        instaGifElement.appendChild(animatedImage);
       }
     });
   }
